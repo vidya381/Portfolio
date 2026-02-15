@@ -1,3 +1,8 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { aboutContent } from '@/lib/data/about'
+
 export default function About() {
   return (
     <section id="about" className="mb-16 scroll-mt-16 lg:mb-24 lg:scroll-mt-24">
@@ -6,11 +11,88 @@ export default function About() {
           About
         </h2>
       </div>
-      <div>
-        <p className="mb-4">
-          About section content coming soon...
-        </p>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="space-y-4">
+          {aboutContent.paragraphs.map((paragraph, index) => (
+            <p key={index} className="text-text-secondary leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        {/* Tech Stack Grid */}
+        <div className="mt-12">
+          <h3 className="mb-6 text-sm font-bold uppercase tracking-widest text-foreground">
+            Tech Stack
+          </h3>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {/* Backend */}
+            <div>
+              <h4 className="mb-3 text-sm font-semibold text-accent">Backend</h4>
+              <div className="flex flex-wrap gap-2">
+                {aboutContent.techStack.backend.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Databases */}
+            <div>
+              <h4 className="mb-3 text-sm font-semibold text-accent">Databases</h4>
+              <div className="flex flex-wrap gap-2">
+                {aboutContent.techStack.databases.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Cloud & DevOps */}
+            <div>
+              <h4 className="mb-3 text-sm font-semibold text-accent">Cloud & DevOps</h4>
+              <div className="flex flex-wrap gap-2">
+                {aboutContent.techStack.cloudDevOps.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Frontend */}
+            <div>
+              <h4 className="mb-3 text-sm font-semibold text-accent">Frontend</h4>
+              <div className="flex flex-wrap gap-2">
+                {aboutContent.techStack.frontend.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </section>
   )
 }
