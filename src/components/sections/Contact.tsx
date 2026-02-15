@@ -1,3 +1,9 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { FaEnvelope, FaFileDownload } from 'react-icons/fa'
+import { SITE_CONFIG } from '@/lib/constants'
+
 export default function Contact() {
   return (
     <section id="contact" className="mb-16 scroll-mt-16 lg:mb-24 lg:scroll-mt-24">
@@ -6,11 +12,46 @@ export default function Contact() {
           Contact
         </h2>
       </div>
-      <div>
-        <p className="mb-4">
-          Contact section content coming soon...
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <p className="mb-6 leading-relaxed text-text-secondary">
+          I&apos;m currently seeking backend or full-stack engineering roles where I can build scalable
+          systems and solve challenging technical problems. Feel free to reach out if you&apos;d like to
+          discuss opportunities or connect!
         </p>
-      </div>
+
+        <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+          {/* Email Button */}
+          <a
+            href={`mailto:${SITE_CONFIG.email}`}
+            className="group inline-flex items-center gap-3 rounded-lg border border-accent bg-accent/10 px-6 py-3 font-semibold text-accent transition-all hover:bg-accent hover:text-white"
+          >
+            <FaEnvelope className="h-5 w-5" />
+            Get in Touch
+          </a>
+
+          {/* Resume Download Button */}
+          <a
+            href="/resume.pdf"
+            download
+            className="group inline-flex items-center gap-3 rounded-lg border border-border bg-card px-6 py-3 font-semibold text-foreground transition-all hover:border-accent hover:bg-accent/10 hover:text-accent"
+          >
+            <FaFileDownload className="h-5 w-5" />
+            Download Resume
+          </a>
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-12 border-t border-border pt-6">
+          <p className="text-sm text-text-secondary">
+            Built with Next.js, TypeScript, and Tailwind CSS. Deployed on Vercel.
+          </p>
+        </div>
+      </motion.div>
     </section>
   )
 }
