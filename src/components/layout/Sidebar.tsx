@@ -15,7 +15,7 @@ export default function Sidebar() {
           Software Engineer
         </h2>
         <p className="mt-4 max-w-xs text-base leading-normal text-text-secondary">
-          Building scalable systems with 4 years of experience in software engineering and full-stack development
+          I write clean code, debug tricky problems, and enjoy solving hard problems. Mostly backend, some frontend.
         </p>
         <Navigation />
       </div>

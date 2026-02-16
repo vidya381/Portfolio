@@ -9,8 +9,8 @@ export const COLORS = {
 } as const
 
 export const SITE_CONFIG = {
-  name: 'Vidya Desu',
-  email: 'vidyasagar.desu@gmail.com',
+  name: 'Vidya Sagar Desu',
+  email: 'd.vidya381@gmail.com',
   github: 'https://github.com/vidya381',
   linkedin: 'https://www.linkedin.com/in/vidyasagar-desu',
 } as const

@@ -1,12 +1,12 @@
 export const aboutContent = {
   paragraphs: [
-    "I'm a software engineer with 4 years of experience building scalable systems and full-stack applications. My focus is on backend development, system design, API development, and creating robust architectures that power user-facing applications.",
+    "I solve problems by building systems.",
 
-    "I've worked across various industries—from telecommunications at AT&T to healthcare at Prime Healthcare and enterprise solutions at IBM. These experiences have given me a strong foundation in building production-grade systems that handle real-world complexity and scale.",
+    "I work on backend systems: APIs, databases, and distributed architectures. I've built production software at IBM (working with AT&T and Barclays) and Prime Healthcare. The fun part is debugging why something breaks under load and fixing it before anyone notices.",
 
-    "I enjoy building projects from scratch to understand the full stack—from database design and backend APIs to frontend implementation and deployment. My side projects reflect this: a personal finance tracker with automated recurring transactions, a weather analytics platform with ML-powered insights, a real-time multiplayer game with WebSocket communication, and a data transformation playground.",
+    "I build side projects to learn new things. Right now I'm working with Java and Python for backend, Next.js for frontend, and learning Go. I deploy everything on Oracle Cloud's free tier. Turns out running three apps on 1GB RAM teaches you more about optimization than any course.",
 
-    "I'm currently seeking backend or full-stack engineering roles where I can contribute to building scalable systems and solve challenging technical problems. I'm particularly interested in distributed systems, API design, and backend architecture.",
+    "I'm looking for backend or full-stack software engineering roles (H1B sponsorship needed). When I'm not coding, I play badminton and contribute to open-source projects like Kubernetes and Oracle OpenGrok.",
   ],
 
   techStack: {
