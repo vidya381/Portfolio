@@ -19,7 +19,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       className="group relative rounded-lg border border-border bg-card p-6 transition-all hover:shadow-lg"
     >
       {/* Project Image */}
-      <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-lg bg-text-secondary/10">
+      <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-lg bg-text-secondary/10">
         <Image
           src={project.image}
           alt={project.title}
@@ -30,12 +30,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* Content */}
       <div>
-        <div className="mb-2 flex items-start justify-between gap-2">
+        <div className="mb-3 flex items-start justify-between gap-2">
           <div>
-            <h3 className="text-lg font-semibold text-foreground group-hover:text-accent">
+            <h3 className="text-xl font-semibold text-foreground group-hover:text-accent">
               {project.title}
             </h3>
-            <p className="text-sm text-text-secondary">{project.subtitle}</p>
+            <p className="text-base text-text-secondary">{project.subtitle}</p>
           </div>
 
           {/* Links */}
@@ -65,17 +65,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </div>
 
-        <p className="mb-3 text-sm leading-relaxed text-text-secondary">
+        <p className="mb-4 text-base leading-relaxed text-text-secondary">
           {project.description}
         </p>
 
         {/* Challenge */}
         {project.challenge && (
-          <div className="mb-4 rounded-md bg-accent/5 p-3">
-            <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+          <div className="mb-5 rounded-md bg-accent/5 p-4">
+            <p className="text-sm font-semibold uppercase tracking-wide text-accent">
               Challenge
             </p>
-            <p className="mt-1 text-sm leading-relaxed text-text-secondary">
+            <p className="mt-2 text-base leading-relaxed text-text-secondary">
               {project.challenge}
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+              className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
             >
               {tech}
             </span>

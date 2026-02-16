@@ -9,21 +9,21 @@ export default function Experience() {
   const [activeTab, setActiveTab] = useState(0)
 
   return (
-    <section id="experience" className="mb-16 scroll-mt-16 lg:mb-24 lg:scroll-mt-24">
-      <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-background/75 px-6 py-5 backdrop-blur lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-foreground lg:sr-only">
+    <section id="experience" className="mb-32 scroll-mt-16 lg:mb-36 lg:scroll-mt-24">
+      <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-background/75 px-6 py-5 backdrop-blur lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+        <h2 className="text-base font-bold uppercase tracking-widest text-foreground lg:sr-only">
           Experience
         </h2>
       </div>
       <div className="group/experience">
         {/* Tab Buttons */}
-        <div className="flex gap-2 overflow-x-auto border-b border-border pb-2">
+        <div className="flex gap-3 overflow-x-auto border-b border-border pb-3">
           {experiences.map((exp, index) => (
             <button
               key={exp.company}
               onClick={() => setActiveTab(index)}
               className={cn(
-                'whitespace-nowrap rounded-t-lg px-4 py-2 text-sm font-medium transition-all',
+                'whitespace-nowrap rounded-t-lg px-5 py-3 text-base font-medium transition-all',
                 activeTab === index
                   ? 'bg-accent/10 text-accent'
                   : 'text-text-secondary hover:bg-accent/5 hover:text-foreground'
@@ -42,32 +42,32 @@ export default function Experience() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="pt-6"
+            className="pt-8"
           >
-            <div className="mb-2">
-              <h3 className="text-lg font-semibold text-foreground">
+            <div className="mb-4">
+              <h3 className="text-xl font-semibold text-foreground">
                 {experiences[activeTab].role}
               </h3>
-              <p className="text-sm text-text-secondary">
+              <p className="text-base text-text-secondary">
                 {experiences[activeTab].duration}
               </p>
             </div>
 
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-6 space-y-4">
               {experiences[activeTab].bullets.map((bullet, index) => (
-                <li key={index} className="flex gap-3 text-text-secondary">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                <li key={index} className="flex gap-3 text-base text-text-secondary">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                   <span className="leading-relaxed">{bullet}</span>
                 </li>
               ))}
             </ul>
 
             {/* Tech Stack */}
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-8 flex flex-wrap gap-2">
               {experiences[activeTab].techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
                 >
                   {tech}
                 </span>

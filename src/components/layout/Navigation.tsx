@@ -34,28 +34,29 @@ export default function Navigation() {
 
   return (
     <nav className="nav hidden lg:block" aria-label="In-page jump links">
-      <ul className="mt-16 w-max">
+      <ul className="mt-20 w-max">
         {NAV_ITEMS.map(({ id, label }) => (
           <li key={id}>
             <button
               onClick={() => scrollToSection(id)}
               className={cn(
-                'group flex items-center py-3 transition-all',
+                'group flex items-center py-4 transition-all',
                 activeSection === id ? 'active' : ''
               )}
             >
               <span
                 className={cn(
-                  'nav-indicator mr-4 h-px w-8 bg-text-secondary transition-all group-hover:w-16 group-hover:bg-accent',
-                  activeSection === id && 'w-16 bg-accent'
+                  'nav-indicator mr-4 h-px bg-text-secondary transition-all duration-300',
+                  'w-12 group-hover:w-20 group-hover:bg-accent group-hover:h-0.5',
+                  activeSection === id && 'w-20 bg-accent h-0.5'
                 )}
               />
               <span
                 className={cn(
-                  'nav-text text-xs font-bold uppercase tracking-widest transition-all',
+                  'nav-text text-sm font-semibold uppercase tracking-wide transition-all',
                   activeSection === id
-                    ? 'text-foreground'
-                    : 'text-text-secondary group-hover:text-foreground'
+                    ? 'text-foreground text-base'
+                    : 'text-text-secondary group-hover:text-foreground group-hover:text-base'
                 )}
               >
                 {label}

@@ -11,14 +11,14 @@ export default function OpenSource() {
     .sort((a, b) => (a.order || 0) - (b.order || 0))
 
   return (
-    <section id="opensource" className="mb-16 scroll-mt-16 lg:mb-24 lg:scroll-mt-24">
-      <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-background/75 px-6 py-5 backdrop-blur lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-foreground lg:sr-only">
+    <section id="opensource" className="mb-32 scroll-mt-16 lg:mb-36 lg:scroll-mt-24">
+      <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-background/75 px-6 py-5 backdrop-blur lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+        <h2 className="text-base font-bold uppercase tracking-widest text-foreground lg:sr-only">
           Open Source
         </h2>
       </div>
       <div>
-        <div className="space-y-6">
+        <div className="space-y-8">
           {featuredProjects.map((project, index) => (
             <motion.a
               key={project.name}
@@ -29,26 +29,26 @@ export default function OpenSource() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group block rounded-lg border border-border bg-card p-5 transition-all hover:shadow-lg"
+              className="group block rounded-lg border border-border bg-card p-6 transition-all hover:shadow-lg"
             >
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
-                  <div className="mb-2 flex items-center gap-2">
+                  <div className="mb-3 flex items-center gap-2">
                     <FaGithub className="h-5 w-5 text-text-secondary" />
-                    <h3 className="font-semibold text-foreground group-hover:text-accent">
+                    <h3 className="text-lg font-semibold text-foreground group-hover:text-accent">
                       {project.name}
                     </h3>
                   </div>
-                  <p className="mb-2 text-sm leading-relaxed text-text-secondary">
+                  <p className="mb-3 text-base leading-relaxed text-text-secondary">
                     {project.description}
                   </p>
                   {project.contributionType && (
-                    <span className="inline-block rounded-full bg-accent/10 px-2 py-1 text-xs font-medium text-accent">
+                    <span className="inline-block rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent">
                       {project.contributionType}
                     </span>
                   )}
                 </div>
-                <FaArrowRight className="mt-1 h-4 w-4 shrink-0 text-text-secondary transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+                <FaArrowRight className="mt-1 h-5 w-5 shrink-0 text-text-secondary transition-transform group-hover:translate-x-1 group-hover:text-accent" />
               </div>
             </motion.a>
           ))}
@@ -60,11 +60,11 @@ export default function OpenSource() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8"
+          className="mt-10"
         >
           <Link
             href="/opensource"
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
+            className="group inline-flex items-center gap-2 text-base font-semibold text-accent hover:underline"
           >
             View All Contributions ({openSourceProjects.length})
             <FaArrowRight className="transition-transform group-hover:translate-x-1" />
