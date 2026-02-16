@@ -16,15 +16,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="group relative rounded-lg border border-border bg-card p-6 transition-all hover:shadow-lg"
+      className="group relative rounded-lg border border-border bg-card p-8 transition-all hover:shadow-lg hover:border-accent/50"
     >
       {/* Project Image */}
-      <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-lg bg-text-secondary/10">
+      <div className="relative mb-6 h-48 w-full overflow-hidden rounded-lg bg-text-secondary/10">
         <Image
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover transition-transform group-hover:scale-105"
+          className="object-cover object-top transition-transform group-hover:scale-105"
         />
       </div>
 

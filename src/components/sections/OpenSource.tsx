@@ -11,14 +11,14 @@ export default function OpenSource() {
     .sort((a, b) => (a.order || 0) - (b.order || 0))
 
   return (
-    <section id="opensource" className="mb-32 scroll-mt-16 lg:mb-36 lg:scroll-mt-24">
+    <section id="opensource" className="mb-16 scroll-mt-16 lg:mb-24 lg:scroll-mt-24">
       <div className="sticky top-0 z-20 -mx-6 mb-8 w-screen bg-background/75 px-6 py-5 backdrop-blur lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
         <h2 className="text-base font-bold uppercase tracking-widest text-foreground lg:sr-only">
           Open Source
         </h2>
       </div>
       <div>
-        <div className="space-y-8">
+        <div className="space-y-6">
           {featuredProjects.map((project, index) => (
             <motion.a
               key={project.name}
@@ -29,7 +29,7 @@ export default function OpenSource() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group block rounded-lg border border-border bg-card p-6 transition-all hover:shadow-lg"
+              className="group block rounded-lg border border-border bg-card p-7 transition-all hover:shadow-lg hover:border-accent/50"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
