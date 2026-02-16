@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-portfolio-domain.vercel.app',
+    url: 'https://vidyadesu.vercel.app',
     title: 'Vidya Desu | Software Engineer',
     description:
       'Software engineer with 4 years of experience building scalable systems. Specialized in Spring Boot, FastAPI, and full-stack development.',
