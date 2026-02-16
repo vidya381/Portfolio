@@ -26,7 +26,8 @@ export default function Navigation() {
 
       if (isBottom && sections.length > 0) {
         // If near bottom, highlight the last section
-        setActiveSection(sections[sections.length - 1].id)
+        const lastSection = sections[sections.length - 1]
+        if (lastSection) setActiveSection(lastSection.id)
       } else {
         // Find the section that's currently at the top of the viewport
         const current = sections.find(
@@ -37,7 +38,8 @@ export default function Navigation() {
           setActiveSection(current.id)
         } else if (sections.length > 0 && sections[0]?.top > 200) {
           // If we're at the very top, highlight the first section
-          setActiveSection(sections[0].id)
+          const firstSection = sections[0]
+          if (firstSection) setActiveSection(firstSection.id)
         }
       }
     }
