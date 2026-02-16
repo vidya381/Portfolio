@@ -12,10 +12,10 @@ export default function Sidebar() {
           {SITE_CONFIG.name}
         </h1>
         <h2 className="mt-3 text-lg font-medium tracking-tight text-foreground sm:text-xl">
-          Backend Engineer
+          Software Engineer
         </h2>
         <p className="mt-4 max-w-xs leading-normal text-text-secondary">
-          Building scalable systems with 4 years of experience in backend and full-stack development
+          Building scalable systems with 4 years of experience in software engineering and full-stack development
         </p>
         <Navigation />
       </div>

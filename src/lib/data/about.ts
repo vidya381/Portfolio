@@ -1,6 +1,6 @@
 export const aboutContent = {
   paragraphs: [
-    "I'm a backend engineer with 4 years of experience building scalable systems and full-stack applications. My focus is on system design, API development, and creating robust backend architectures that power user-facing applications.",
+    "I'm a software engineer with 4 years of experience building scalable systems and full-stack applications. My focus is on backend development, system design, API development, and creating robust architectures that power user-facing applications.",
 
     "I've worked across various industries—from telecommunications at AT&T to healthcare at Prime Healthcare and enterprise solutions at IBM. These experiences have given me a strong foundation in building production-grade systems that handle real-world complexity and scale.",
 
