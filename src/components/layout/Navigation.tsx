@@ -36,10 +36,12 @@ export default function Navigation() {
 
         if (current) {
           setActiveSection(current.id)
-        } else if (sections.length > 0 && sections[0]?.top > 200) {
+        } else if (sections.length > 0) {
           // If we're at the very top, highlight the first section
           const firstSection = sections[0]
-          if (firstSection) setActiveSection(firstSection.id)
+          if (firstSection && firstSection.top > 200) {
+            setActiveSection(firstSection.id)
+          }
         }
       }
     }
