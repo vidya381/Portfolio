@@ -1,6 +1,6 @@
 'use client'
 
-import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaEnvelope, FaFilePdf } from 'react-icons/fa'
 import { SITE_CONFIG } from '@/lib/constants'
 
 export default function SocialLinks() {
@@ -45,7 +45,7 @@ export default function SocialLinks() {
           className="block text-text-secondary transition hover:text-accent"
           aria-label="Resume"
         >
-          <FaFileAlt className="h-6 w-6" />
+          <FaFilePdf className="h-6 w-6" />
         </a>
       </li>
     </ul>
