@@ -1,11 +1,11 @@
 'use client'
 
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt } from 'react-icons/fa'
 import { SITE_CONFIG } from '@/lib/constants'
 
 export default function SocialLinks() {
   return (
-    <ul className="ml-1 mt-8 flex items-center gap-5" aria-label="Social media">
+    <ul className="ml-1 flex items-center gap-5" aria-label="Social media">
       <li className="shrink-0">
         <a
           href={SITE_CONFIG.github}
@@ -35,6 +35,17 @@ export default function SocialLinks() {
           aria-label="Email"
         >
           <FaEnvelope className="h-6 w-6" />
+        </a>
+      </li>
+      <li className="shrink-0">
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="block text-text-secondary transition hover:text-accent"
+          aria-label="Resume"
+        >
+          <FaFileAlt className="h-6 w-6" />
         </a>
       </li>
     </ul>

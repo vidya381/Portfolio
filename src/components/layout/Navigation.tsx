@@ -8,23 +8,43 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-          }
-        })
-      },
-      { threshold: 0.5 }
-    )
+    const handleScroll = () => {
+      const sections = NAV_ITEMS.map(({ id }) => {
+        const element = document.getElementById(id)
+        if (!element) return null
 
-    NAV_ITEMS.forEach(({ id }) => {
-      const element = document.getElementById(id)
-      if (element) observer.observe(element)
-    })
+        const rect = element.getBoundingClientRect()
+        return {
+          id,
+          top: rect.top,
+          bottom: rect.bottom,
+        }
+      }).filter(Boolean)
 
-    return () => observer.disconnect()
+      // Check if we're near the bottom of the page
+      const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100
+
+      if (isBottom && sections.length > 0) {
+        // If near bottom, highlight the last section
+        setActiveSection(sections[sections.length - 1].id)
+      } else {
+        // Find the section that's currently at the top of the viewport
+        const current = sections.find(
+          (section) => section && section.top <= 200 && section.bottom > 200
+        )
+
+        if (current) {
+          setActiveSection(current.id)
+        } else if (sections.length > 0 && sections[0]?.top > 200) {
+          // If we're at the very top, highlight the first section
+          setActiveSection(sections[0].id)
+        }
+      }
+    }
+
+    handleScroll() // Set initial active section
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const scrollToSection = (id: string) => {

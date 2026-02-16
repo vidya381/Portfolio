@@ -6,7 +6,7 @@ import SocialLinks from './SocialLinks'
 
 export default function Sidebar() {
   return (
-    <div className="lg:flex lg:flex-col lg:justify-between">
+    <>
       <div>
         <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           {SITE_CONFIG.name}
@@ -20,6 +20,6 @@ export default function Sidebar() {
         <Navigation />
       </div>
       <SocialLinks />
-    </div>
+    </>
   )
 }
