@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FaGithub, FaArrowRight } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa'
 import { openSourceProjects } from '@/lib/data/opensource'
 import Link from 'next/link'
 
@@ -18,6 +18,9 @@ export default function OpenSource() {
         </h2>
       </div>
       <div>
+        <p className="mb-6 text-base text-text-secondary">
+          I contribute to open-source projects when I find bugs or see improvements.
+        </p>
         <div className="space-y-6">
           {featuredProjects.map((project, index) => (
             <motion.a
@@ -31,24 +34,16 @@ export default function OpenSource() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group block rounded-lg border border-border bg-card p-7 transition-all hover:shadow-lg hover:border-accent/50"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="mb-3 flex items-center gap-2">
-                    <FaGithub className="h-5 w-5 text-text-secondary" />
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-accent">
-                      {project.name}
-                    </h3>
-                  </div>
-                  <p className="mb-3 text-base leading-relaxed text-text-secondary">
-                    {project.description}
-                  </p>
-                  {project.contributionType && (
-                    <span className="inline-block rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent">
-                      {project.contributionType}
-                    </span>
-                  )}
+              <div>
+                <div className="mb-3 flex items-center gap-2">
+                  <FaGithub className="h-5 w-5 text-text-secondary" />
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-accent">
+                    {project.name}
+                  </h3>
                 </div>
-                <FaArrowRight className="mt-1 h-5 w-5 shrink-0 text-text-secondary transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+                <p className="text-base leading-relaxed text-text-secondary">
+                  {project.description}
+                </p>
               </div>
             </motion.a>
           ))}
@@ -64,10 +59,9 @@ export default function OpenSource() {
         >
           <Link
             href="/opensource"
-            className="group inline-flex items-center gap-2 text-base font-semibold text-accent hover:underline"
+            className="text-base font-semibold text-accent hover:underline"
           >
             View All Contributions ({openSourceProjects.length})
-            <FaArrowRight className="transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>
       </div>
