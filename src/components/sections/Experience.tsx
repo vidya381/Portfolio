@@ -15,18 +15,18 @@ export default function Experience() {
           Experience
         </h2>
       </div>
-      <div className="group/experience">
-        {/* Tab Buttons */}
-        <div className="flex gap-3 overflow-x-auto border-b border-border pb-3">
+      <div className="flex flex-col md:flex-row md:gap-8">
+        {/* Vertical Tab Buttons */}
+        <div className="mb-6 flex overflow-x-auto md:mb-0 md:block md:w-48 md:flex-shrink-0 md:overflow-visible">
           {experiences.map((exp, index) => (
             <button
-              key={exp.company}
+              key={index}
               onClick={() => setActiveTab(index)}
               className={cn(
-                'whitespace-nowrap rounded-t-lg px-5 py-3 text-base font-medium transition-all',
+                'whitespace-nowrap border-l-2 px-4 py-3 text-left text-sm font-medium transition-all md:block md:w-full',
                 activeTab === index
-                  ? 'bg-accent/10 text-accent'
-                  : 'text-text-secondary hover:bg-accent/5 hover:text-foreground'
+                  ? 'border-accent bg-accent/10 text-accent'
+                  : 'border-border text-text-secondary hover:border-accent/50 hover:bg-accent/5 hover:text-foreground'
               )}
             >
               {exp.company}
@@ -35,46 +35,47 @@ export default function Experience() {
         </div>
 
         {/* Tab Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="pt-8"
-          >
-            <div className="mb-4">
-              <h3 className="text-xl font-semibold text-foreground">
-                {experiences[activeTab].role}
-              </h3>
-              <p className="text-base text-text-secondary">
-                {experiences[activeTab].duration}
-              </p>
-            </div>
+        <div className="flex-1">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold text-foreground">
+                  {experiences[activeTab].role}
+                </h3>
+                <p className="text-base text-text-secondary">
+                  {experiences[activeTab].duration}
+                </p>
+              </div>
 
-            <ul className="mt-6 space-y-4">
-              {experiences[activeTab].bullets.map((bullet, index) => (
-                <li key={index} className="flex gap-3 text-base text-text-secondary">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                  <span className="leading-relaxed">{bullet}</span>
-                </li>
-              ))}
-            </ul>
+              <ul className="mt-6 space-y-4">
+                {experiences[activeTab].bullets.map((bullet, index) => (
+                  <li key={index} className="flex gap-3 text-base text-text-secondary">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    <span className="leading-relaxed">{bullet}</span>
+                  </li>
+                ))}
+              </ul>
 
-            {/* Tech Stack */}
-            <div className="mt-8 flex flex-wrap gap-2">
-              {experiences[activeTab].techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
+              {/* Tech Stack */}
+              <div className="mt-8 flex flex-wrap gap-2">
+                {experiences[activeTab].techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   )
