@@ -78,7 +78,7 @@ export const projects: Project[] = [
     description:
       'Browser-based tool for transforming JSON and CSV data entirely client-side. Handles parsing, filtering, sorting, and format conversion with session sharing via short URLs.',
     challenge:
-      'Solved Next.js 15 to 16 async params breaking change that only failed in production builds. Built smart JSON parser handling nested objects and API responses, not just clean arrays.',
+      'Built JSON parser that handles messy real-world data. Supports nested objects, API response wrappers, and single objects. Parses data structures that typical tools reject.',
     techStack: [
       'Next.js',
       'TypeScript',
