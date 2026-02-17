@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaCheckCircle } from 'react-icons/fa'
@@ -18,12 +15,7 @@ export default function MySpendoPage() {
       </Link>
 
       {/* Hero Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
-      >
+      <div className="mb-12">
         <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">MySpendo</h1>
         <p className="mb-6 text-xl text-text-secondary">Personal Finance Management Platform</p>
 
@@ -57,16 +49,10 @@ export default function MySpendoPage() {
             className="h-full w-full object-cover"
           />
         </div>
-      </motion.div>
+      </div>
 
       {/* Overview */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Overview</h2>
         <div className="space-y-4 text-text-secondary">
           <p className="leading-relaxed">
@@ -96,16 +82,10 @@ export default function MySpendoPage() {
             <div className="text-sm text-text-secondary">Core Features</div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Tech Stack */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Tech Stack</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
@@ -148,16 +128,10 @@ export default function MySpendoPage() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Technical Challenges */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Technical Challenges</h2>
         <div className="space-y-6">
           {[
@@ -214,16 +188,10 @@ export default function MySpendoPage() {
             </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
       {/* Key Features */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Key Features</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {[
@@ -242,16 +210,10 @@ export default function MySpendoPage() {
             </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
       {/* What I Learned */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">What I Learned</h2>
         <div className="space-y-4 rounded-lg border border-border bg-card p-6 text-text-secondary">
           <p className="leading-relaxed">
@@ -275,7 +237,7 @@ export default function MySpendoPage() {
             pagination from day 1 instead of retrofitting it later.
           </p>
         </div>
-      </motion.section>
+      </section>
     </div>
   )
 }

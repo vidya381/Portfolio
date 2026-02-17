@@ -1,8 +1,5 @@
-'use client'
-
 import Image from 'next/image'
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
-import { motion } from 'framer-motion'
 import { Project } from '@/lib/types'
 
 interface ProjectCardProps {
@@ -11,13 +8,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="group relative rounded-lg border border-border bg-card p-8 transition-all hover:shadow-lg hover:border-accent/50"
-    >
+    <div className="group relative rounded-lg border border-border bg-card p-8 transition-all hover:shadow-lg hover:border-accent/50">
       {/* Project Image */}
       <div className="relative mb-6 h-48 w-full overflow-hidden rounded-lg bg-text-secondary/10">
         <Image
@@ -93,6 +84,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }

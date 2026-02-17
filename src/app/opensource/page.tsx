@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { FaGithub, FaArrowLeft } from 'react-icons/fa'
 import { openSourceProjects } from '@/lib/data/opensource'
 import Link from 'next/link'
@@ -18,33 +15,25 @@ export default function OpenSourcePage() {
       </Link>
 
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
-      >
+      <div className="mb-12">
         <h1 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
           Open Source Contributions
         </h1>
         <p className="text-lg text-text-secondary">
           My contributions to open-source projects
         </p>
-      </motion.div>
+      </div>
 
       {/* All Projects */}
       <div className="space-y-6">
         {openSourceProjects
           .sort((a, b) => (a.order || 0) - (b.order || 0))
-          .map((project, index) => (
-            <motion.a
+          .map((project) => (
+            <a
               key={project.name}
               href={project.repoUrl}
               target="_blank"
               rel="noreferrer noopener"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group block rounded-lg border border-border bg-card p-6 transition-all hover:shadow-lg"
             >
               <div>
@@ -58,7 +47,7 @@ export default function OpenSourcePage() {
                   {project.description}
                 </p>
               </div>
-            </motion.a>
+            </a>
           ))}
       </div>
     </div>

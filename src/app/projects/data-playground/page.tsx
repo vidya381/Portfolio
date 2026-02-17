@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaCheckCircle } from 'react-icons/fa'
@@ -16,12 +13,7 @@ export default function DataPlaygroundPage() {
         Back to Projects
       </Link>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
-      >
+      <div className="mb-12">
         <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">Data Playground</h1>
         <p className="mb-6 text-xl text-text-secondary">Browser-Based Data Transformation Tool</p>
 
@@ -55,15 +47,9 @@ export default function DataPlaygroundPage() {
             className="h-full w-full object-cover"
           />
         </div>
-      </motion.div>
+      </div>
 
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Overview</h2>
         <div className="space-y-4 text-text-secondary">
           <p className="leading-relaxed">
@@ -92,15 +78,9 @@ export default function DataPlaygroundPage() {
             <div className="text-sm text-text-secondary">Session Auto-Expire</div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Tech Stack</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
@@ -130,15 +110,9 @@ export default function DataPlaygroundPage() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Technical Challenges</h2>
         <div className="space-y-6">
           {[
@@ -195,15 +169,9 @@ export default function DataPlaygroundPage() {
             </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Key Features</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {[
@@ -222,15 +190,9 @@ export default function DataPlaygroundPage() {
             </div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
-      >
+      <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">What I Learned</h2>
         <div className="space-y-4 rounded-lg border border-border bg-card p-6 text-text-secondary">
           <p className="leading-relaxed">
@@ -254,7 +216,7 @@ export default function DataPlaygroundPage() {
             Web Workers for processing very large files without blocking the UI.
           </p>
         </div>
-      </motion.section>
+      </section>
     </div>
   )
 }

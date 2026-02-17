@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { aboutContent } from '@/lib/data/about'
 
 export default function About() {
@@ -11,12 +8,7 @@ export default function About() {
           About
         </h2>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
+      <div>
         <div className="space-y-5">
           {aboutContent.paragraphs.map((paragraph, index) => (
             <p key={index} className="text-base text-text-secondary leading-relaxed">
@@ -92,7 +84,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

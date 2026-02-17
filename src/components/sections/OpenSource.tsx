@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { FaGithub } from 'react-icons/fa'
 import { openSourceProjects } from '@/lib/data/opensource'
 import Link from 'next/link'
@@ -22,16 +19,12 @@ export default function OpenSource() {
           I contribute to open-source projects when I find bugs or see improvements.
         </p>
         <div className="space-y-6">
-          {featuredProjects.map((project, index) => (
-            <motion.a
+          {featuredProjects.map((project) => (
+            <a
               key={project.name}
               href={project.repoUrl}
               target="_blank"
               rel="noreferrer noopener"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group block rounded-lg border border-border bg-card p-7 transition-all hover:shadow-lg hover:border-accent/50"
             >
               <div>
@@ -45,25 +38,19 @@ export default function OpenSource() {
                   {project.description}
                 </p>
               </div>
-            </motion.a>
+            </a>
           ))}
         </div>
 
         {/* View All Link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-10"
-        >
+        <div className="mt-10">
           <Link
             href="/opensource"
             className="text-base font-semibold text-accent hover:underline"
           >
             View All Contributions ({openSourceProjects.length})
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
