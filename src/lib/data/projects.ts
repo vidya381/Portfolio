@@ -6,17 +6,15 @@ export const projects: Project[] = [
     title: 'MySpendo',
     subtitle: 'Personal Finance Tracker',
     description:
-      'Full-stack personal finance management platform with automated recurring transactions, budget alerts, and analytics. Features Spring Boot backend with scheduled jobs, PostgreSQL database, and React frontend deployed on Vercel.',
+      'Full-stack expense tracker with Go backend and Next.js frontend. Track income, expenses, and budgets with automated recurring transactions and analytics.',
     challenge:
-      'Built a production-ready background job system using Spring Boot @Scheduled for automated recurring transactions. Implemented budget alerts with real-time notifications and CSV export functionality.',
+      'Built automated recurring transactions with PostgreSQL advisory locks to prevent duplicates. Handled edge cases like month-end dates, leap years, and server restarts.',
     techStack: [
-      'Spring Boot',
+      'Go',
+      'Next.js',
       'PostgreSQL',
-      'React',
-      'TypeScript',
-      'Tailwind CSS',
-      'Vercel',
       'Oracle Cloud',
+      'Vercel',
     ],
     image: '/images/projects/myspendo-hero.png',
     links: {
@@ -29,18 +27,17 @@ export const projects: Project[] = [
   {
     id: 'weather-insight',
     title: 'Weather Insight',
-    subtitle: 'AI-Powered Weather Analytics',
+    subtitle: 'Weather Analytics Platform',
     description:
-      'Weather analytics platform with machine learning insights, anomaly detection, and predictive analysis. Built with FastAPI backend, integrated OpenWeatherMap API, and implements ML models for pattern clustering and temperature trend prediction.',
+      'Weather tracking app with machine learning built using FastAPI and React. Tracks multiple cities and runs ML analysis to detect temperature anomalies, predict trends, and cluster patterns.',
     challenge:
-      'Implemented real-time anomaly detection using statistical analysis and ML-powered weather pattern clustering. Built caching layer to optimize API calls and reduce latency by 60%.',
+      'Built ML pipeline with APScheduler running on 1GB RAM. Implemented caching that cut redundant API calls by 66% using 10-minute TTL and request deduplication.',
     techStack: [
-      'FastAPI',
       'Python',
-      'PostgreSQL',
-      'Machine Learning',
+      'FastAPI',
       'React',
-      'Next.js',
+      'PostgreSQL',
+      'Oracle Cloud',
       'Vercel',
     ],
     image: '/images/projects/weather-insight-hero.png',
@@ -53,19 +50,18 @@ export const projects: Project[] = [
   },
   {
     id: 'bulls-cows',
-    title: 'Bulls & Cows Game',
-    subtitle: 'Real-Time Multiplayer Game',
+    title: 'Bulls & Cows',
+    subtitle: 'Multiplayer Game Platform',
     description:
-      'Full-stack multiplayer code-breaking game with 5 game modes, real-time WebSocket communication, and social features. Features dual REST + WebSocket architecture, thread-safe concurrent session management, and vanilla JavaScript frontend.',
+      'Code-breaking game with Spring Boot backend and real-time WebSocket multiplayer. Five game modes including daily challenges and 1v1 battles with live progress updates.',
     challenge:
-      'Built complex real-time multiplayer system with WebSocket (STOMP) for live game updates. Implemented thread-safe session management using ConcurrentHashMap to handle multiple simultaneous games per user.',
+      'Built thread-safe session management with ConcurrentHashMap using composite keys. Implemented WebSocket authentication with JWT for secure real-time multiplayer across different tabs.',
     techStack: [
+      'Java',
       'Spring Boot',
-      'WebSocket (STOMP)',
+      'WebSocket',
       'PostgreSQL',
-      'Vanilla JavaScript',
-      'REST APIs',
-      'Render',
+      'JavaScript',
     ],
     image: '/images/projects/bulls-cows-hero.png',
     links: {
@@ -78,16 +74,15 @@ export const projects: Project[] = [
   {
     id: 'data-playground',
     title: 'Data Playground',
-    subtitle: 'Browser-Based Data Tool',
+    subtitle: 'Data Transformation Tool',
     description:
-      'Browser-based data transformation tool for JSON/CSV parsing, filtering, and format conversion. Features client-side processing, session sharing with PostgreSQL, and smart JSON parser that handles nested objects and API responses.',
+      'Browser-based tool for transforming JSON and CSV data entirely client-side. Handles parsing, filtering, sorting, and format conversion with session sharing via short URLs.',
     challenge:
-      'Implemented intelligent JSON parser that extracts arrays from nested objects and API responses. Built session sharing architecture with Neon serverless PostgreSQL and auto-expiring short URLs.',
+      'Solved Next.js 15 to 16 async params breaking change that only failed in production builds. Built smart JSON parser handling nested objects and API responses, not just clean arrays.',
     techStack: [
-      'Next.js 16',
+      'Next.js',
       'TypeScript',
-      'Tailwind CSS v4',
-      'PostgreSQL (Neon)',
+      'PostgreSQL',
       'Vercel',
     ],
     image: '/images/projects/data-playground-hero.png',
