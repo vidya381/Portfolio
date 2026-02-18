@@ -212,7 +212,7 @@ PostgreSQL → NumPy/Pandas → Scikit-learn → Cache Results (24h)`}
             {
               title: 'ML with Limited Data',
               problem:
-                'ML needs historical data but new cities have none. Can\'t show insights immediately.',
+                'ML needs historical data but new cities have none. Can&apos;t show insights immediately.',
               solution:
                 'Show clear messages when data is insufficient. Hourly collection builds history automatically. Sample data on registration lets users try features.',
               impact:

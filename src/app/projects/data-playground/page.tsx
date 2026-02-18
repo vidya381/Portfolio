@@ -59,7 +59,7 @@ export default function DataPlaygroundPage() {
             Browser-based tool for transforming JSON and CSV data entirely client-side. Handles parsing, filtering, sorting, and format conversion with session sharing via short URLs.
           </p>
           <p className="leading-relaxed">
-            Started as a simple JSON/CSV converter to practice Next.js 16's new App Router. Evolved into a full data playground when I realized I could add more features without much complexity.
+            Started as a simple JSON/CSV converter to practice Next.js 16&apos;s new App Router. Evolved into a full data playground when I realized I could add more features without much complexity.
           </p>
         </div>
 
@@ -272,7 +272,7 @@ PostgreSQL triggers auto-delete after 7 days (interval-based)`}
         <h2 className="mb-6 text-2xl font-bold text-foreground">What I Learned</h2>
         <div className="space-y-4 rounded-lg border border-border bg-card p-6 text-text-secondary">
           <p className="leading-relaxed">
-            <strong className="text-foreground">Next.js 16 App Router:</strong> Server components, dynamic params, and Suspense boundaries. Learned the hard way that dev mode doesn't catch everything. Always run builds locally.
+            <strong className="text-foreground">Next.js 16 App Router:</strong> Server components, dynamic params, and Suspense boundaries. Learned the hard way that dev mode doesn&apos;t catch everything. Always run builds locally.
           </p>
           <p className="leading-relaxed">
             <strong className="text-foreground">Serverless PostgreSQL:</strong> Neon setup was straightforward. JSONB queries are flexible. Auto-expiration with PostgreSQL intervals works well.

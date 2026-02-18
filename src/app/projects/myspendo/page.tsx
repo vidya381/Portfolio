@@ -115,7 +115,7 @@ Go Backend → PostgreSQL Advisory Lock → Process Recurring Transactions`}
             Frontend talks to backend through REST APIs. Backend handles authentication with JWT, business logic, and database operations. An hourly job runs in the background to process recurring transactions.
           </p>
           <p className="leading-relaxed">
-            I used PostgreSQL advisory locks to make sure the background job doesn't create duplicate transactions if multiple instances run. Connection pooling keeps things fast with 25 max connections.
+            I used PostgreSQL advisory locks to make sure the background job doesn&apos;t create duplicate transactions if multiple instances run. Connection pooling keeps things fast with 25 max connections.
           </p>
           <p className="leading-relaxed">
             Data flow is simple: user creates a transaction in the UI, frontend sends it to the backend, backend saves it to PostgreSQL and checks if any budgets are exceeded, then returns the response.
@@ -192,7 +192,7 @@ Go Backend → PostgreSQL Advisory Lock → Process Recurring Transactions`}
               problem:
                 'Hourly background job processes recurring transactions. If two instances run at the same time, users get duplicate transactions.',
               solution:
-                'Used PostgreSQL advisory locks. Job tries to get the lock before running. If it can\'t get it, another instance is already running, so it exits. Releases lock when done.',
+                'Used PostgreSQL advisory locks. Job tries to get the lock before running. If it can&apos;t get it, another instance is already running, so it exits. Releases lock when done.',
               impact:
                 'No duplicate transactions. Job runs reliably every hour even during server restarts.',
             },
