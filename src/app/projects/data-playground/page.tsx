@@ -83,33 +83,13 @@ export default function DataPlaygroundPage() {
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Architecture</h2>
         <div className="rounded-lg border border-border bg-card p-6">
-          <pre className="text-sm text-text-secondary overflow-x-auto">
-{`┌─────────────────┐
-│   Next.js       │
-│   Frontend      │ ← Client-side data processing
-│   (Vercel)      │
-└────────┬────────┘
-         │ API Routes (Optional)
-         ▼
-┌─────────────────┐
-│   Next.js API   │
-│   Routes        │ ← Session storage only
-│   (2 endpoints) │
-└────────┬────────┘
-         │ SQL
-         ▼
-┌─────────────────┐
-│   PostgreSQL    │
-│   (Neon)        │ ← JSONB storage, auto-expire
-└─────────────────┘
-
-Data Flow:
-User uploads file → Browser parses JSON/CSV → Client-side transformations
-→ User clicks "Share" → API saves to PostgreSQL → Returns short URL
-
-Session Expiry:
-PostgreSQL triggers auto-delete after 7 days (interval-based)`}
-          </pre>
+          <Image
+            src="/images/architecture/Data Playground Architecture.png"
+            alt="Data Playground Architecture Diagram"
+            width={1200}
+            height={800}
+            className="w-full h-auto"
+          />
         </div>
         <div className="mt-6 space-y-4 text-text-secondary">
           <p className="leading-relaxed">

@@ -83,29 +83,13 @@ export default function MySpendoPage() {
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Architecture</h2>
         <div className="rounded-lg border border-border bg-card p-6">
-          <pre className="text-sm text-text-secondary overflow-x-auto">
-{`┌─────────────────┐
-│   Next.js       │
-│   Frontend      │ ← User Interface
-│   (Vercel)      │
-└────────┬────────┘
-         │ REST APIs
-         ▼
-┌─────────────────┐
-│   Go Backend    │
-│   Gorilla Mux   │ ← Business Logic, JWT Auth
-│   (Oracle Cloud)│
-└────────┬────────┘
-         │ SQL Queries
-         ▼
-┌─────────────────┐
-│   PostgreSQL    │
-│   (Neon)        │ ← Data Storage
-└─────────────────┘
-
-Background Job (Hourly):
-Go Backend → PostgreSQL Advisory Lock → Process Recurring Transactions`}
-          </pre>
+          <Image
+            src="/images/architecture/MySpendo Architecture.png"
+            alt="MySpendo Architecture Diagram"
+            width={1200}
+            height={800}
+            className="w-full h-auto"
+          />
         </div>
         <div className="mt-6 space-y-4 text-text-secondary">
           <p className="leading-relaxed">

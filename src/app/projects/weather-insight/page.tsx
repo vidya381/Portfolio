@@ -83,33 +83,13 @@ export default function WeatherInsightPage() {
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Architecture</h2>
         <div className="rounded-lg border border-border bg-card p-6">
-          <pre className="text-sm text-text-secondary overflow-x-auto">
-{`┌─────────────────┐
-│   React         │
-│   Frontend      │ ← User Interface (Vite)
-│   (Vercel)      │
-└────────┬────────┘
-         │ REST APIs
-         ▼
-┌─────────────────┐
-│   FastAPI       │
-│   Backend       │ ← Business Logic, ML Processing
-│   (Oracle Cloud)│
-└────────┬────────┘
-         │ SQL Queries
-         ▼
-┌─────────────────┐        ┌──────────────────┐
-│   PostgreSQL    │        │  OpenWeather API │
-│   (Neon)        │ ←──────┤  External Data   │
-└─────────────────┘        └──────────────────┘
-
-Background Jobs (APScheduler):
-Hourly:  Fetch weather for favorited cities
-Daily:   Clean up data older than 180 days
-
-ML Pipeline:
-PostgreSQL → NumPy/Pandas → Scikit-learn → Cache Results (24h)`}
-          </pre>
+          <Image
+            src="/images/architecture/Weather Insight Architecture.png"
+            alt="Weather Insight Architecture Diagram"
+            width={1200}
+            height={800}
+            className="w-full h-auto"
+          />
         </div>
         <div className="mt-6 space-y-4 text-text-secondary">
           <p className="leading-relaxed">

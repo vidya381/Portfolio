@@ -83,33 +83,13 @@ export default function BullsCowsPage() {
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Architecture</h2>
         <div className="rounded-lg border border-border bg-card p-6">
-          <pre className="text-sm text-text-secondary overflow-x-auto">
-{`┌─────────────────┐
-│   Vanilla JS    │
-│   Frontend      │ ← User Interface (12 modules)
-│   (Static)      │
-└────────┬────────┘
-         │ REST + WebSocket
-         ▼
-┌─────────────────┐
-│   Spring Boot   │
-│   Backend       │ ← Game Logic, JWT Auth
-│   (Render)      │
-└────────┬────────┘
-         │ SQL Queries
-         ▼
-┌─────────────────┐
-│   PostgreSQL    │
-│   (Neon)        │ ← User Data, Game History
-└─────────────────┘
-
-REST: Game CRUD, Auth, Leaderboards
-WebSocket (STOMP): Live game updates, Friend presence, Notifications
-
-Session Management:
-ConcurrentHashMap<sessionId:tabId, GameSession>
-Thread-safe for concurrent gameplay`}
-          </pre>
+          <Image
+            src="/images/architecture/Bulls and Cows Architecture.png"
+            alt="Bulls & Cows Architecture Diagram"
+            width={1200}
+            height={800}
+            className="w-full h-auto"
+          />
         </div>
         <div className="mt-6 space-y-4 text-text-secondary">
           <p className="leading-relaxed">
