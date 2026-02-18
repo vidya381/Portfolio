@@ -8,8 +8,8 @@
   --color-background: #fafafa;
   --color-foreground: #1a1a1a;
   --color-text-secondary: #666666;
-  --color-accent: #17a589;
-  --color-accent-hover: #138d75;
+  --color-accent: #0F766E;
+  --color-accent-hover: #115E59;
   --color-border: #e5e7eb;
   --color-card: #ffffff;
 
@@ -41,5 +41,5 @@ a {
 }
 
 a:hover {
-  color: #17a589;
+  color: #0F766E;
 }

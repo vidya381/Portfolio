@@ -206,7 +206,7 @@ export default function MySpendoPage() {
                   <p className="text-sm leading-relaxed text-text-secondary">{challenge.solution}</p>
                 </div>
                 <div>
-                  <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-foreground">
+                  <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-text-secondary">
                     Impact
                   </p>
                   <p className="text-sm leading-relaxed text-text-secondary">{challenge.impact}</p>
