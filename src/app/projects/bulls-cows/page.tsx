@@ -33,7 +33,7 @@ export default function BullsCowsPage() {
             href="https://bulls-cows-game.onrender.com"
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 rounded-lg border border-accent bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent hover:text-white"
+            className="inline-flex items-center gap-2 rounded-lg border border-accent bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition hover:bg-accent hover:!text-white"
           >
             <FaExternalLinkAlt />
             Live Demo
