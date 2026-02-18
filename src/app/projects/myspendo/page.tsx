@@ -17,7 +17,7 @@ export default function MySpendoPage() {
       {/* Hero Section */}
       <div className="mb-12">
         <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">MySpendo</h1>
-        <p className="mb-6 text-xl text-text-secondary">Personal Finance Management Platform</p>
+        <p className="mb-6 text-xl text-text-secondary">Personal Finance Tracker</p>
 
         <div className="mb-6 flex flex-wrap gap-4">
           <a
@@ -56,31 +56,70 @@ export default function MySpendoPage() {
         <h2 className="mb-6 text-2xl font-bold text-foreground">Overview</h2>
         <div className="space-y-4 text-text-secondary">
           <p className="leading-relaxed">
-            MySpendo is a full-stack personal finance tracker that helps users manage their income,
-            expenses, and budgets. The platform features automated recurring transactions, budget
-            alerts with customizable thresholds, and comprehensive financial analytics with
-            interactive charts.
+            A personal finance tracker I built to learn Go. Users can track income and expenses, set budgets with alerts, and automate recurring transactions like rent and subscriptions.
           </p>
           <p className="leading-relaxed">
-            Built with a Spring Boot backend and React frontend, the application handles real-world
-            complexity like scheduled background jobs, transaction categorization, and data export
-            functionality.
+            I wanted to learn Go backend development and work with real complexity like scheduled jobs and handling date edge cases. Turned out to be more interesting than I expected, especially the recurring transaction logic.
           </p>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
           <div className="rounded-lg border border-border bg-card p-6">
-            <div className="mb-2 text-3xl font-bold text-accent">$0/month</div>
-            <div className="text-sm text-text-secondary">Hosting Cost</div>
+            <div className="mb-2 text-3xl font-bold text-accent">25+</div>
+            <div className="text-sm text-text-secondary">REST endpoints</div>
           </div>
           <div className="rounded-lg border border-border bg-card p-6">
-            <div className="mb-2 text-3xl font-bold text-accent">8,000+</div>
-            <div className="text-sm text-text-secondary">Lines of Code</div>
+            <div className="mb-2 text-3xl font-bold text-accent">Hourly</div>
+            <div className="text-sm text-text-secondary">Background job</div>
           </div>
           <div className="rounded-lg border border-border bg-card p-6">
-            <div className="mb-2 text-3xl font-bold text-accent">5</div>
-            <div className="text-sm text-text-secondary">Core Features</div>
+            <div className="mb-2 text-3xl font-bold text-accent">3</div>
+            <div className="text-sm text-text-secondary">Tech Stack Layers</div>
           </div>
+        </div>
+      </section>
+
+      {/* Architecture */}
+      <section className="mb-16">
+        <h2 className="mb-6 text-2xl font-bold text-foreground">Architecture</h2>
+        <div className="rounded-lg border border-border bg-card p-6">
+          <pre className="text-sm text-text-secondary overflow-x-auto">
+{`┌─────────────────┐
+│   Next.js       │
+│   Frontend      │ ← User Interface
+│   (Vercel)      │
+└────────┬────────┘
+         │ REST APIs
+         ▼
+┌─────────────────┐
+│   Go Backend    │
+│   Gorilla Mux   │ ← Business Logic, JWT Auth
+│   (Oracle Cloud)│
+└────────┬────────┘
+         │ SQL Queries
+         ▼
+┌─────────────────┐
+│   PostgreSQL    │
+│   (Neon)        │ ← Data Storage
+└─────────────────┘
+
+Background Job (Hourly):
+Go Backend → PostgreSQL Advisory Lock → Process Recurring Transactions`}
+          </pre>
+        </div>
+        <div className="mt-6 space-y-4 text-text-secondary">
+          <p className="leading-relaxed">
+            The app has three parts: Next.js frontend on Vercel, Go backend on Oracle Cloud, and PostgreSQL database on Neon.
+          </p>
+          <p className="leading-relaxed">
+            Frontend talks to backend through REST APIs. Backend handles authentication with JWT, business logic, and database operations. An hourly job runs in the background to process recurring transactions.
+          </p>
+          <p className="leading-relaxed">
+            I used PostgreSQL advisory locks to make sure the background job doesn't create duplicate transactions if multiple instances run. Connection pooling keeps things fast with 25 max connections.
+          </p>
+          <p className="leading-relaxed">
+            Data flow is simple: user creates a transaction in the UI, frontend sends it to the backend, backend saves it to PostgreSQL and checks if any budgets are exceeded, then returns the response.
+          </p>
         </div>
       </section>
 
@@ -91,10 +130,23 @@ export default function MySpendoPage() {
           <div>
             <h3 className="mb-3 font-semibold text-accent">Backend</h3>
             <div className="flex flex-wrap gap-2">
-              {['Spring Boot 3.1', 'Java 17', 'PostgreSQL', 'Hibernate/JPA', '@Scheduled Jobs', 'REST APIs'].map((tech) => (
+              {['Go', 'Gorilla Mux', 'JWT auth', 'PostgreSQL driver'].map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent"
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="mb-3 font-semibold text-accent">Database</h3>
+            <div className="flex flex-wrap gap-2">
+              {['Neon PostgreSQL', 'Advisory locks', 'Connection pooling'].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
                 >
                   {tech}
                 </span>
@@ -104,10 +156,10 @@ export default function MySpendoPage() {
           <div>
             <h3 className="mb-3 font-semibold text-accent">Frontend</h3>
             <div className="flex flex-wrap gap-2">
-              {['React', 'TypeScript', 'Tailwind CSS', 'Recharts', 'React Router'].map((tech) => (
+              {['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Recharts'].map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent"
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
                 >
                   {tech}
                 </span>
@@ -117,10 +169,10 @@ export default function MySpendoPage() {
           <div>
             <h3 className="mb-3 font-semibold text-accent">Deployment</h3>
             <div className="flex flex-wrap gap-2">
-              {['Vercel (Frontend)', 'Oracle Cloud (Backend)', 'Neon PostgreSQL'].map((tech) => (
+              {['Oracle Cloud (1GB RAM)', 'Vercel'].map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent"
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
                 >
                   {tech}
                 </span>
@@ -136,31 +188,22 @@ export default function MySpendoPage() {
         <div className="space-y-6">
           {[
             {
-              title: 'Automated Recurring Transactions',
+              title: 'PostgreSQL Advisory Locks',
               problem:
-                'Users needed automatic transaction creation for subscriptions and bills without manual entry every month.',
+                'Hourly background job processes recurring transactions. If two instances run at the same time, users get duplicate transactions.',
               solution:
-                'Built a background job system using Spring Boot @Scheduled that runs daily to check and create transactions from recurring templates. Implemented proper date handling and timezone management.',
+                'Used PostgreSQL advisory locks. Job tries to get the lock before running. If it can\'t get it, another instance is already running, so it exits. Releases lock when done.',
               impact:
-                'Users can set up recurring transactions once and forget about them. System processes 1000+ automated transactions daily.',
+                'No duplicate transactions. Job runs reliably every hour even during server restarts.',
             },
             {
-              title: 'Real-time Budget Alerts',
+              title: 'Recurring Transaction Edge Cases',
               problem:
-                'Users wanted to be notified when spending exceeded their budget limits, but polling would be inefficient.',
+                'Users schedule recurring rent on the 31st, but February only has 28 days. Leap year dates break in non-leap years.',
               solution:
-                'Implemented a transaction trigger system that checks budget thresholds on every transaction create/update. Built customizable alert levels (50%, 75%, 100%).',
+                'For month-end dates, use the last day of the target month. Feb 29 becomes Feb 28 in non-leap years. Added max iteration limit to prevent infinite loops if logic breaks.',
               impact:
-                'Users receive instant feedback on budget status. Reduced over-spending incidents by 60%.',
-            },
-            {
-              title: 'CSV Export with Complex Filters',
-              problem:
-                'Users needed to export transaction data with multiple filters (date range, categories, types) for tax preparation.',
-              solution:
-                'Built a flexible query builder using JPA Specifications to handle dynamic filters. Implemented server-side CSV generation to handle large datasets.',
-              impact:
-                'Users can export filtered data in seconds. Handles 10,000+ transaction exports efficiently.',
+                'Recurring transactions work for all date scenarios. No bugs reported.',
             },
           ].map((challenge, index) => (
             <div key={index} className="rounded-lg border border-border bg-card p-6">
@@ -195,14 +238,13 @@ export default function MySpendoPage() {
         <h2 className="mb-6 text-2xl font-bold text-foreground">Key Features</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {[
-            'Transaction tracking (income & expenses)',
+            'Transaction tracking (income and expenses)',
+            'Budget alerts when spending exceeds limits',
             'Automated recurring transactions',
-            'Budget management with alerts',
+            'Analytics with charts',
+            'CSV/JSON export',
             'Category-based organization',
-            'Interactive analytics charts',
-            'CSV/JSON export functionality',
             'Date range filtering',
-            'Multi-currency support',
           ].map((feature) => (
             <div key={feature} className="flex items-start gap-3">
               <FaCheckCircle className="mt-1 h-5 w-5 shrink-0 text-accent" />
@@ -217,24 +259,19 @@ export default function MySpendoPage() {
         <h2 className="mb-6 text-2xl font-bold text-foreground">What I Learned</h2>
         <div className="space-y-4 rounded-lg border border-border bg-card p-6 text-text-secondary">
           <p className="leading-relaxed">
-            <strong className="text-foreground">Background Jobs:</strong> Learned how to build
-            reliable scheduled jobs with @Scheduled. Initially tried running jobs every minute, but
-            that was inefficient. Settled on daily runs with proper error handling and logging.
+            <strong className="text-foreground">Go Backend:</strong> First time building backend with Go. Error handling is verbose but forces you to think about edge cases. Compiled binary makes deployment simple.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Database Design:</strong> Spent time getting the
-            schema right upfront. Normalized properly to avoid data duplication, but also
-            denormalized where needed for performance (storing calculated totals).
+            <strong className="text-foreground">PostgreSQL Advisory Locks:</strong> Never used these before. Perfect for preventing duplicate jobs without building a separate queue system.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">API Design:</strong> Learned to design RESTful APIs
-            that are intuitive and consistent. Used DTOs to decouple frontend and backend models,
-            which made refactoring much easier.
+            <strong className="text-foreground">Date Logic is Harder Than Expected:</strong> Month-end dates, leap years, and timezones all create edge cases. Spent way more time on date logic than I thought I would.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">What I&apos;d do differently:</strong> Would implement
-            proper caching for frequently accessed data like budget summaries. Also would add
-            pagination from day 1 instead of retrofitting it later.
+            <strong className="text-foreground">Deployment on Free Tier:</strong> Deployed on Oracle Cloud's 1GB RAM instance. Had to optimize connection pooling and use prepared statements to keep memory usage low. Constraints force better optimization.
+          </p>
+          <p className="leading-relaxed">
+            <strong className="text-foreground">What I&apos;d Do Differently:</strong> Would use a proper job queue like BullMQ instead of cron. Add pagination from day one instead of retrofitting it. More tests upfront instead of adding them later.
           </p>
         </div>
       </section>
