@@ -5,6 +5,7 @@ import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaCheckCircle } from 'react-i
 export default function BullsCowsPage() {
   return (
     <div className="mx-auto min-h-screen max-w-5xl px-6 py-12 md:px-12 md:py-20">
+      {/* Back Link */}
       <Link
         href="/#projects"
         className="group mb-8 inline-flex items-center gap-2 text-sm text-text-secondary transition hover:text-accent"
@@ -13,9 +14,10 @@ export default function BullsCowsPage() {
         Back to Projects
       </Link>
 
+      {/* Hero Section */}
       <div className="mb-12">
-        <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">Bulls & Cows Game</h1>
-        <p className="mb-6 text-xl text-text-secondary">Real-Time Multiplayer Code-Breaking Game</p>
+        <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">Bulls & Cows</h1>
+        <p className="mb-6 text-xl text-text-secondary">Multiplayer Game Platform</p>
 
         <div className="mb-6 flex flex-wrap gap-4">
           <a
@@ -49,48 +51,106 @@ export default function BullsCowsPage() {
         </div>
       </div>
 
+      {/* Overview */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Overview</h2>
         <div className="space-y-4 text-text-secondary">
           <p className="leading-relaxed">
-            Bulls & Cows is a full-stack multiplayer code-breaking game with 5 game modes, real-time
-            WebSocket communication, and social features. Players guess a secret number with unique
-            digits and receive feedback: bulls (correct position) and cows (wrong position).
+            Code-breaking game with Spring Boot backend and real-time WebSocket multiplayer. Players guess a secret number and get feedback (bulls for correct position, cows for wrong position). Five game modes including daily challenges and 1v1 battles.
           </p>
           <p className="leading-relaxed">
-            Built entirely from scratch using Spring Boot and vanilla JavaScript (no frontend
-            frameworks), the platform features a dual REST + WebSocket architecture for optimal
-            performance. The most challenging aspect was implementing thread-safe concurrent session
-            management to support multiple simultaneous games per user.
+            I built this to learn WebSocket programming and real-time systems. Also wanted to practice complex state management without a frontend framework. Everything is vanilla JavaScript.
           </p>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
           <div className="rounded-lg border border-border bg-card p-6">
-            <div className="mb-2 text-3xl font-bold text-accent">8,700+</div>
-            <div className="text-sm text-text-secondary">Lines of Code</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-6">
             <div className="mb-2 text-3xl font-bold text-accent">5</div>
-            <div className="text-sm text-text-secondary">Game Modes</div>
+            <div className="text-sm text-text-secondary">Game modes</div>
           </div>
           <div className="rounded-lg border border-border bg-card p-6">
-            <div className="mb-2 text-3xl font-bold text-accent">40+</div>
-            <div className="text-sm text-text-secondary">REST Endpoints</div>
+            <div className="mb-2 text-3xl font-bold text-accent">Real-time</div>
+            <div className="text-sm text-text-secondary">WebSocket</div>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-6">
+            <div className="mb-2 text-3xl font-bold text-accent">34</div>
+            <div className="text-sm text-text-secondary">Achievements</div>
           </div>
         </div>
       </section>
 
+      {/* Architecture */}
+      <section className="mb-16">
+        <h2 className="mb-6 text-2xl font-bold text-foreground">Architecture</h2>
+        <div className="rounded-lg border border-border bg-card p-6">
+          <pre className="text-sm text-text-secondary overflow-x-auto">
+{`┌─────────────────┐
+│   Vanilla JS    │
+│   Frontend      │ ← User Interface (12 modules)
+│   (Static)      │
+└────────┬────────┘
+         │ REST + WebSocket
+         ▼
+┌─────────────────┐
+│   Spring Boot   │
+│   Backend       │ ← Game Logic, JWT Auth
+│   (Render)      │
+└────────┬────────┘
+         │ SQL Queries
+         ▼
+┌─────────────────┐
+│   PostgreSQL    │
+│   (Neon)        │ ← User Data, Game History
+└─────────────────┘
+
+REST: Game CRUD, Auth, Leaderboards
+WebSocket (STOMP): Live game updates, Friend presence, Notifications
+
+Session Management:
+ConcurrentHashMap<sessionId:tabId, GameSession>
+Thread-safe for concurrent gameplay`}
+          </pre>
+        </div>
+        <div className="mt-6 space-y-4 text-text-secondary">
+          <p className="leading-relaxed">
+            The app uses both REST and WebSocket. REST handles game logic, authentication, and data persistence. WebSocket handles real-time features like multiplayer sync, friend presence, and live notifications.
+          </p>
+          <p className="leading-relaxed">
+            Spring Boot backend manages game sessions in memory using ConcurrentHashMap. Each game mode has its own session class with different logic. PostgreSQL stores user data, game history, achievements, and friendships.
+          </p>
+          <p className="leading-relaxed">
+            WebSocket uses STOMP messaging protocol. Users subscribe to channels for their active games and friend updates. Server broadcasts game state changes to all connected players.
+          </p>
+          <p className="leading-relaxed">
+            Session management uses composite keys (sessionId:tabId) so users can play multiple modes in different tabs. Scheduled cleanup removes expired sessions after 5-30 minutes depending on mode.
+          </p>
+        </div>
+      </section>
+
+      {/* Tech Stack */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Tech Stack</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <h3 className="mb-3 font-semibold text-accent">Backend</h3>
             <div className="flex flex-wrap gap-2">
-              {['Spring Boot 3.1', 'Java 17', 'WebSocket (STOMP)', 'PostgreSQL', 'JWT Auth', 'REST APIs'].map((tech) => (
+              {['Spring Boot 3.1', 'WebSocket (STOMP)', 'Hibernate/JPA', 'HikariCP'].map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent"
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="mb-3 font-semibold text-accent">Database</h3>
+            <div className="flex flex-wrap gap-2">
+              {['Neon PostgreSQL', '13 entities'].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
                 >
                   {tech}
                 </span>
@@ -100,10 +160,23 @@ export default function BullsCowsPage() {
           <div>
             <h3 className="mb-3 font-semibold text-accent">Frontend</h3>
             <div className="flex flex-wrap gap-2">
-              {['Vanilla JavaScript', 'HTML5', 'CSS3', 'SockJS', 'Modular Architecture'].map((tech) => (
+              {['Vanilla JavaScript (12 modules)', 'STOMP.js for WebSocket'].map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent"
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="mb-3 font-semibold text-accent">Deployment</h3>
+            <div className="flex flex-wrap gap-2">
+              {['Render (Docker container)'].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
                 >
                   {tech}
                 </span>
@@ -113,36 +186,37 @@ export default function BullsCowsPage() {
         </div>
       </section>
 
+      {/* Technical Challenges */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Technical Challenges</h2>
         <div className="space-y-6">
           {[
             {
-              title: 'Real-Time Multiplayer Synchronization',
-              problem:
-                'Both players needed to see live updates of each other&apos;s guesses and scores without page refreshes or excessive API polling.',
-              solution:
-                'Implemented WebSocket (STOMP over SockJS) for bidirectional real-time communication. Built event-driven architecture where each guess triggers WebSocket messages to all connected players in that game session.',
-              impact:
-                'Players see opponent updates in under 100ms. Handles 50+ concurrent multiplayer games without performance issues.',
-            },
-            {
               title: 'Thread-Safe Session Management',
               problem:
-                'Users could play multiple game modes simultaneously (timed + multiplayer + practice). Needed to prevent race conditions when updating game state.',
+                'In multiplayer mode, two players compete on the same secret number. They make guesses concurrently from different browsers. Without proper synchronization, race conditions could corrupt game state.',
               solution:
-                'Used ConcurrentHashMap with composite keys (sessionId:tabId) for thread-safe in-memory storage. Implemented proper locking mechanisms and atomic operations for state updates.',
+                'Used ConcurrentHashMap for session storage (thread-safe by design). Server is the source of truth for game state. WebSocket events are sequenced to prevent out-of-order processing.',
               impact:
-                'Zero race conditions across 1000+ concurrent sessions. Users can play 5 different games simultaneously without conflicts.',
+                'Zero race condition bugs in production. Multiplayer feels smooth and instant.',
             },
             {
-              title: 'Dual Communication Architecture',
+              title: 'WebSocket Authentication',
               problem:
-                'Deciding when to use REST vs WebSocket. Using only WebSocket would complicate simple operations like creating a game.',
+                'WebSocket connections need authentication but they don\'t use standard HTTP headers after the handshake. JWT tokens need validation but where do you check them?',
               solution:
-                'Designed clear separation: REST for stateful CRUD operations (create game, save results), WebSocket only for real-time events (guess updates, notifications). Each has specific responsibilities.',
+                'Validate JWT during WebSocket handshake (initial HTTP upgrade). Store user info in WebSocket session attributes. Check authorization on every message. Disconnect invalid sessions immediately.',
               impact:
-                'Clean architecture that&apos;s easy to maintain. New developers can understand the system quickly. API remains simple while real-time features work seamlessly.',
+                'Secure real-time communication. No unauthorized access to multiplayer games or friend presence data.',
+            },
+            {
+              title: 'Concurrent Session Management',
+              problem:
+                'Users can play multiple game modes simultaneously in different tabs. How do you track separate sessions without conflicts?',
+              solution:
+                'Composite keys: sessionId:tabId. Each mode has its own session class with different logic. ConcurrentHashMap handles concurrent access. Scheduled cleanup removes expired sessions. Mode-specific validation prevents cross-mode state bugs.',
+              impact:
+                'Users can play multiple modes at once without issues. Sessions stay isolated and clean up automatically.',
             },
           ].map((challenge, index) => (
             <div key={index} className="rounded-lg border border-border bg-card p-6">
@@ -172,18 +246,19 @@ export default function BullsCowsPage() {
         </div>
       </section>
 
+      {/* Key Features */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Key Features</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {[
-            '5 game modes (Timed, Rounds, Continuous, Practice, Multiplayer)',
-            'Real-time multiplayer with live updates',
-            'Friends system with online presence',
-            'Achievements and leaderboards',
-            'Game history and statistics',
-            'Customizable difficulty levels',
-            'JWT-based authentication',
-            'Responsive modular vanilla JS frontend',
+            'Practice Mode (3 difficulties with hints)',
+            'Daily Challenge (same puzzle for everyone, global leaderboard)',
+            'Time Attack (5-minute timer, multiple games)',
+            'Survival Mode (5 rounds with limited attempts)',
+            'Multiplayer 1v1 (real-time battles with friends)',
+            'Friends system with online/offline presence',
+            '34 achievements with auto-unlock',
+            'Global leaderboards',
           ].map((feature) => (
             <div key={feature} className="flex items-start gap-3">
               <FaCheckCircle className="mt-1 h-5 w-5 shrink-0 text-accent" />
@@ -193,28 +268,24 @@ export default function BullsCowsPage() {
         </div>
       </section>
 
+      {/* What I Learned */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">What I Learned</h2>
         <div className="space-y-4 rounded-lg border border-border bg-card p-6 text-text-secondary">
           <p className="leading-relaxed">
-            <strong className="text-foreground">WebSocket Programming:</strong> Learned the
-            difference between WebSocket and REST, and when to use each. Initially tried to do
-            everything over WebSocket but realized that made simple operations complex.
+            <strong className="text-foreground">WebSocket Programming:</strong> Real-time sync is harder than it looks. Need to think about connection drops, reconnection logic, and message ordering. STOMP makes it easier than raw WebSocket.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Concurrent Programming:</strong> Spent significant
-            time understanding Java&apos;s concurrency utilities. ConcurrentHashMap and atomic operations
-            were key to building a thread-safe system without excessive locking.
+            <strong className="text-foreground">Thread-Safe Concurrent Programming:</strong> ConcurrentHashMap was essential. Learned to think about race conditions and use proper synchronization. Server as source of truth prevents most sync issues.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Vanilla JavaScript at Scale:</strong> Built a
-            modular frontend with 12 JS files and 8,700+ lines without a framework. Learned proper
-            separation of concerns, event handling, and DOM manipulation patterns.
+            <strong className="text-foreground">State Management Without Frameworks:</strong> Vanilla JavaScript taught me a lot. No framework magic means you understand every piece. Modular architecture with separate files per feature kept things organized.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">What I&apos;d do differently:</strong> Would add
-            comprehensive integration tests for multiplayer flows. Also would implement rate limiting
-            from day 1 to prevent spam guesses.
+            <strong className="text-foreground">Complex Database Relationships:</strong> 13 entities with many-to-many relationships (users, friends, achievements). JPA makes this manageable but query optimization matters.
+          </p>
+          <p className="leading-relaxed">
+            <strong className="text-foreground">What I&apos;d Do Differently:</strong> Use Redis for session storage (would allow horizontal scaling). Add proper job queue for background tasks. Implement WebSocket scaling strategy from day one. More comprehensive testing. Mobile apps would be better than mobile web.
           </p>
         </div>
       </section>
