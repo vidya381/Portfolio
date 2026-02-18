@@ -5,6 +5,7 @@ import { FaGithub, FaExternalLinkAlt, FaArrowLeft, FaCheckCircle } from 'react-i
 export default function WeatherInsightPage() {
   return (
     <div className="mx-auto min-h-screen max-w-5xl px-6 py-12 md:px-12 md:py-20">
+      {/* Back Link */}
       <Link
         href="/#projects"
         className="group mb-8 inline-flex items-center gap-2 text-sm text-text-secondary transition hover:text-accent"
@@ -13,9 +14,10 @@ export default function WeatherInsightPage() {
         Back to Projects
       </Link>
 
+      {/* Hero Section */}
       <div className="mb-12">
         <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl">Weather Insight</h1>
-        <p className="mb-6 text-xl text-text-secondary">AI-Powered Weather Analytics Platform</p>
+        <p className="mb-6 text-xl text-text-secondary">Weather Analytics Platform</p>
 
         <div className="mb-6 flex flex-wrap gap-4">
           <a
@@ -49,48 +51,106 @@ export default function WeatherInsightPage() {
         </div>
       </div>
 
+      {/* Overview */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Overview</h2>
         <div className="space-y-4 text-text-secondary">
           <p className="leading-relaxed">
-            Weather Insight goes beyond basic forecasts by combining real-time weather data with
-            machine learning to provide intelligent insights. The platform detects weather
-            anomalies, predicts temperature trends, and identifies recurring weather patterns using
-            ML clustering algorithms.
+            Weather tracking app with machine learning. Built with FastAPI and React to track multiple cities and run ML analysis for anomaly detection, trend prediction, and pattern clustering.
           </p>
           <p className="leading-relaxed">
-            Built with FastAPI for the backend and Next.js for the frontend, the application
-            integrates OpenWeatherMap API and implements custom ML models for pattern analysis and
-            anomaly detection.
+            I built this to learn FastAPI and experiment with ML on real data. Weather data is free and complex enough to be interesting.
           </p>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
           <div className="rounded-lg border border-border bg-card p-6">
-            <div className="mb-2 text-3xl font-bold text-accent">60%</div>
-            <div className="text-sm text-text-secondary">Latency Reduction</div>
+            <div className="mb-2 text-3xl font-bold text-accent">40+</div>
+            <div className="text-sm text-text-secondary">REST endpoints</div>
           </div>
           <div className="rounded-lg border border-border bg-card p-6">
-            <div className="mb-2 text-3xl font-bold text-accent">3</div>
-            <div className="text-sm text-text-secondary">ML Models</div>
+            <div className="mb-2 text-3xl font-bold text-accent">ML</div>
+            <div className="text-sm text-text-secondary">Pipeline</div>
           </div>
           <div className="rounded-lg border border-border bg-card p-6">
-            <div className="mb-2 text-3xl font-bold text-accent">$0/month</div>
-            <div className="text-sm text-text-secondary">Hosting Cost</div>
+            <div className="mb-2 text-3xl font-bold text-accent">180</div>
+            <div className="text-sm text-text-secondary">Days historical data</div>
           </div>
         </div>
       </section>
 
+      {/* Architecture */}
+      <section className="mb-16">
+        <h2 className="mb-6 text-2xl font-bold text-foreground">Architecture</h2>
+        <div className="rounded-lg border border-border bg-card p-6">
+          <pre className="text-sm text-text-secondary overflow-x-auto">
+{`┌─────────────────┐
+│   React         │
+│   Frontend      │ ← User Interface (Vite)
+│   (Vercel)      │
+└────────┬────────┘
+         │ REST APIs
+         ▼
+┌─────────────────┐
+│   FastAPI       │
+│   Backend       │ ← Business Logic, ML Processing
+│   (Oracle Cloud)│
+└────────┬────────┘
+         │ SQL Queries
+         ▼
+┌─────────────────┐        ┌──────────────────┐
+│   PostgreSQL    │        │  OpenWeather API │
+│   (Neon)        │ ←──────┤  External Data   │
+└─────────────────┘        └──────────────────┘
+
+Background Jobs (APScheduler):
+Hourly:  Fetch weather for favorited cities
+Daily:   Clean up data older than 180 days
+
+ML Pipeline:
+PostgreSQL → NumPy/Pandas → Scikit-learn → Cache Results (24h)`}
+          </pre>
+        </div>
+        <div className="mt-6 space-y-4 text-text-secondary">
+          <p className="leading-relaxed">
+            React frontend talks to FastAPI backend, which connects to PostgreSQL and runs ML analysis. APScheduler runs background jobs hourly to collect weather and daily to clean up old data.
+          </p>
+          <p className="leading-relaxed">
+            Frontend uses client-side caching with 10-minute TTL to reduce API calls. Backend fetches weather from OpenWeather API, stores it in PostgreSQL, and runs ML when users request insights.
+          </p>
+          <p className="leading-relaxed">
+            ML uses NumPy and Pandas for data processing, then runs Z-Score for anomalies, Linear Regression for trends, and K-Means for clustering. Results cached for 24 hours.
+          </p>
+          <p className="leading-relaxed">
+            Background jobs run automatically. Hourly job collects weather for all favorited cities. Daily job removes weather data older than 180 days.
+          </p>
+        </div>
+      </section>
+
+      {/* Tech Stack */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Tech Stack</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <h3 className="mb-3 font-semibold text-accent">Backend & ML</h3>
+            <h3 className="mb-3 font-semibold text-accent">Backend</h3>
             <div className="flex flex-wrap gap-2">
-              {['FastAPI', 'Python', 'PostgreSQL', 'scikit-learn', 'OpenWeatherMap API', 'Redis Cache'].map((tech) => (
+              {['FastAPI', 'APScheduler', 'NumPy', 'Pandas', 'Scikit-learn', 'SQLAlchemy'].map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent"
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="mb-3 font-semibold text-accent">Database</h3>
+            <div className="flex flex-wrap gap-2">
+              {['Neon PostgreSQL', 'JSONB for ML results'].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
                 >
                   {tech}
                 </span>
@@ -100,10 +160,23 @@ export default function WeatherInsightPage() {
           <div>
             <h3 className="mb-3 font-semibold text-accent">Frontend</h3>
             <div className="flex flex-wrap gap-2">
-              {['Next.js', 'React', 'TypeScript', 'Recharts', 'Tailwind CSS'].map((tech) => (
+              {['React 18', 'Vite', 'Context API', 'Recharts'].map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-accent/10 px-3 py-1 text-sm font-medium text-accent"
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="mb-3 font-semibold text-accent">Deployment & APIs</h3>
+            <div className="flex flex-wrap gap-2">
+              {['Oracle Cloud (PM2 + systemd)', 'Vercel', 'OpenWeather API'].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full bg-accent/10 px-3 py-1.5 text-sm font-medium text-accent"
                 >
                   {tech}
                 </span>
@@ -113,36 +186,37 @@ export default function WeatherInsightPage() {
         </div>
       </section>
 
+      {/* Technical Challenges */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Technical Challenges</h2>
         <div className="space-y-6">
           {[
             {
-              title: 'Real-time Anomaly Detection',
+              title: 'APScheduler on Limited RAM',
               problem:
-                'Needed to detect unusual weather patterns (sudden temperature drops, unusual humidity) without false positives from normal seasonal changes.',
+                'Hourly weather collection with APScheduler running in-memory crashed the server under load.',
               solution:
-                'Implemented statistical analysis using Z-scores with a 30-day historical baseline. Tuned threshold to 2.5 standard deviations to balance sensitivity and accuracy.',
+                'Reduced APScheduler thread pool size. Tuned SQLAlchemy connection pooling. Added 2GB swap. Monitored with PM2.',
               impact:
-                'Accurately detects 85% of significant weather anomalies with only 5% false positive rate.',
+                'Runs reliably every hour. Memory stays under 800MB.',
             },
             {
-              title: 'ML Pipeline for Pattern Clustering',
+              title: 'Caching Strategy',
               problem:
-                'Wanted to identify recurring weather patterns (e.g., "cold mornings, warm afternoons") but had limited ML experience.',
+                'Users check weather frequently. Every request hit the API and database. Slow and wasted API quota.',
               solution:
-                'Used K-means clustering on normalized weather features (temperature, humidity, pressure). Experimented with different K values and settled on 5 clusters based on silhouette score.',
+                'Built client-side caching with 10-minute TTL. Custom React hooks check cache before fetching. Request deduplication shares promises for identical requests.',
               impact:
-                'Users can discover weather patterns across multiple cities. Clustering runs in under 2 seconds for 1000+ data points.',
+                'Dashboard feels instant. API calls dropped 66%.',
             },
             {
-              title: 'API Caching Strategy',
+              title: 'ML with Limited Data',
               problem:
-                'OpenWeatherMap API has rate limits (60 calls/min). Multiple users requesting same city data would hit limits.',
+                'ML needs historical data but new cities have none. Can\'t show insights immediately.',
               solution:
-                'Implemented Redis caching with 10-minute TTL for weather data. Added smart cache invalidation and request batching for multiple cities.',
+                'Show clear messages when data is insufficient. Hourly collection builds history automatically. Sample data on registration lets users try features.',
               impact:
-                'Reduced API calls by 60%. Can now support 100+ concurrent users without hitting rate limits.',
+                'Users understand why ML isn\'t ready yet. Sample data works immediately.',
             },
           ].map((challenge, index) => (
             <div key={index} className="rounded-lg border border-border bg-card p-6">
@@ -172,18 +246,18 @@ export default function WeatherInsightPage() {
         </div>
       </section>
 
+      {/* Key Features */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Key Features</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {[
-            'Real-time weather data for multiple cities',
-            '5-day weather forecasts',
-            'ML-powered anomaly detection',
-            'Temperature trend prediction',
-            'Weather pattern clustering',
-            'Favorite cities management',
-            'Interactive charts and visualizations',
-            'Historical weather data analysis',
+            'Multi-city tracking (up to 10 favorites)',
+            'Real-time weather with caching',
+            'Anomaly detection (Z-Score finds unusual temps)',
+            'Trend prediction (Linear Regression, 7-day forecast)',
+            'Pattern clustering (K-Means groups similar weather)',
+            'Hourly background collection',
+            '180-day data retention',
           ].map((feature) => (
             <div key={feature} className="flex items-start gap-3">
               <FaCheckCircle className="mt-1 h-5 w-5 shrink-0 text-accent" />
@@ -193,28 +267,27 @@ export default function WeatherInsightPage() {
         </div>
       </section>
 
+      {/* What I Learned */}
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">What I Learned</h2>
         <div className="space-y-4 rounded-lg border border-border bg-card p-6 text-text-secondary">
           <p className="leading-relaxed">
-            <strong className="text-foreground">Machine Learning in Production:</strong> Learned how
-            to integrate ML models into a production web app. Started with sklearn&apos;s built-in models
-            and focused on getting the data pipeline right before trying complex algorithms.
+            <strong className="text-foreground">FastAPI is Fast:</strong> Love the automatic API docs and async support. Type hints catch errors early. Feels more modern than Flask.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">API Integration & Caching:</strong> Discovered the
-            importance of caching early. Initial version hit rate limits within minutes. Redis caching
-            solved this and made the app much more responsive.
+            <strong className="text-foreground">APScheduler Needs Tuning:</strong> Works well but needs memory optimization. Thread pool size matters when RAM is limited.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Statistical Methods:</strong> Used Z-scores and
-            standard deviations for anomaly detection instead of jumping straight to deep learning.
-            Simple statistical methods work surprisingly well for many problems.
+            <strong className="text-foreground">Real Data is Messy:</strong> APIs return nulls and weird formats. Test data doesn't prepare you for production. Added validation everywhere.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">What I&apos;d do differently:</strong> Would add more
-            comprehensive error handling for API failures. Also would implement background jobs to
-            pre-fetch data for popular cities instead of on-demand requests.
+            <strong className="text-foreground">Client Caching Works:</strong> 10-minute TTL is a good balance. Request deduplication was surprisingly helpful.
+          </p>
+          <p className="leading-relaxed">
+            <strong className="text-foreground">ML is Simpler Than I Thought:</strong> Linear Regression and K-Means work well with minimal tuning. Data quality matters more than algorithm complexity.
+          </p>
+          <p className="leading-relaxed">
+            <strong className="text-foreground">What I&apos;d Do Differently:</strong> Use Celery instead of APScheduler for production. Add rate limiting. WebSocket for live updates instead of polling. Better error messages from day one.
           </p>
         </div>
       </section>
