@@ -40,7 +40,7 @@ export default function DataPlaygroundPage() {
           </a>
         </div>
 
-        <div className="aspect-video w-full overflow-hidden rounded-lg border border-border">
+        <div className="aspect-[21/9] w-full overflow-hidden rounded-lg border border-border">
           <Image
             src="/images/projects/data-playground-hero.png"
             alt="Data Playground"

@@ -40,7 +40,7 @@ export default function WeatherInsightPage() {
           </a>
         </div>
 
-        <div className="aspect-video w-full overflow-hidden rounded-lg border border-border">
+        <div className="aspect-[21/9] w-full overflow-hidden rounded-lg border border-border">
           <Image
             src="/images/projects/weather-insight-hero.png"
             alt="Weather Insight Dashboard"
