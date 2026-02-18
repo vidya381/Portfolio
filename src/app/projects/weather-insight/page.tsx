@@ -278,7 +278,7 @@ PostgreSQL → NumPy/Pandas → Scikit-learn → Cache Results (24h)`}
             <strong className="text-foreground">APScheduler Needs Tuning:</strong> Works well but needs memory optimization. Thread pool size matters when RAM is limited.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Real Data is Messy:</strong> APIs return nulls and weird formats. Test data doesn't prepare you for production. Added validation everywhere.
+            <strong className="text-foreground">Real Data is Messy:</strong> APIs return nulls and weird formats. Test data doesn&apos;t prepare you for production. Added validation everywhere.
           </p>
           <p className="leading-relaxed">
             <strong className="text-foreground">Client Caching Works:</strong> 10-minute TTL is a good balance. Request deduplication was surprisingly helpful.

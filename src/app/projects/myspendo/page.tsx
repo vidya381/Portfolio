@@ -268,7 +268,7 @@ Go Backend → PostgreSQL Advisory Lock → Process Recurring Transactions`}
             <strong className="text-foreground">Date Logic is Harder Than Expected:</strong> Month-end dates, leap years, and timezones all create edge cases. Spent way more time on date logic than I thought I would.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Deployment on Free Tier:</strong> Deployed on Oracle Cloud's 1GB RAM instance. Had to optimize connection pooling and use prepared statements to keep memory usage low. Constraints force better optimization.
+            <strong className="text-foreground">Deployment on Free Tier:</strong> Deployed on Oracle Cloud&apos;s 1GB RAM instance. Had to optimize connection pooling and use prepared statements to keep memory usage low. Constraints force better optimization.
           </p>
           <p className="leading-relaxed">
             <strong className="text-foreground">What I&apos;d Do Differently:</strong> Would use a proper job queue like BullMQ instead of cron. Add pagination from day one instead of retrofitting it. More tests upfront instead of adding them later.
