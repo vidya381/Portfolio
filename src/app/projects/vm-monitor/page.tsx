@@ -56,10 +56,10 @@ export default function VmMonitorPage() {
         <h2 className="mb-6 text-2xl font-bold text-foreground">Overview</h2>
         <div className="space-y-4 text-text-secondary">
           <p className="leading-relaxed">
-            Infrastructure monitoring platform built to manage Oracle Cloud VMs and applications without SSH. Three-component architecture: lightweight Go agents on each VM, control plane API for polling and history, and Next.js dashboard for management.
+            Infrastructure monitoring platform for managing Oracle Cloud VMs without SSH. Three components: Go agent on each VM, control plane API for polling and storage, Next.js dashboard for operations.
           </p>
           <p className="leading-relaxed">
-            Built this to solve a real problem. Every time an app went down, I had to SSH in, check logs, restart services, edit config files. Tedious across multiple VMs. This dashboard handles all of that from the browser without exposing SSH.
+            Needed to manage multiple VMs running MySpendo, Weather Insight, and other apps. SSH workflow was tedious: check status, read logs, edit .env, restart. Multiply that across two VMs with 3-4 apps each. Built this to do all of that from the browser.
           </p>
         </div>
 
@@ -99,16 +99,16 @@ export default function VmMonitorPage() {
         </div>
         <div className="mt-6 space-y-4 text-text-secondary">
           <p className="leading-relaxed">
-            Dashboard calls Next.js API routes which proxy to the control plane API. Keeps API key server-side, handles CORS, and makes demo mode easy to guard in one place.
+            Browser hits Next.js API routes that proxy to control plane. API key stays server-side. Never in browser bundle.
           </p>
           <p className="leading-relaxed">
-            Control plane polls all agents every 30 seconds via private Oracle VCN network. Agents expose HTTP API locally on port 9000, accessible only to control plane IP. No public exposure.
+            Control plane polls agents every 30 seconds over private Oracle VCN network. Agents listen on localhost:9000. Only accessible to control plane&apos;s private IP. No public exposure.
           </p>
           <p className="leading-relaxed">
-            Agents are static Go binaries with zero runtime dependencies. Report systemd service status, Docker containers, journald logs, CPU/memory from /proc, and parse .env files.
+            Agents are static Go binaries. Zero runtime dependencies. Read systemd status, Docker containers, journald logs, CPU/memory from /proc, and parse .env files.
           </p>
           <p className="leading-relaxed">
-            Control plane stores history in PostgreSQL, fires webhook alerts on status changes, acts as authenticated proxy between dashboard and agents, and tracks 30-day uptime.
+            Control plane stores history in PostgreSQL. Fires webhook alerts on crashes. Proxies requests to agents. Tracks 30-day uptime per app.
           </p>
         </div>
       </section>
@@ -204,31 +204,31 @@ export default function VmMonitorPage() {
         <div className="space-y-6">
           {[
             {
-              title: 'SSE Streaming with Demo Mode Fallback',
+              title: 'SSE Streaming with Demo Mode',
               problem:
-                'Log streaming uses Server-Sent Events (SSE) from journalctl -f. SSE can&apos;t easily return fake data in demo mode since they&apos;re long-lived connections. How do you show logs in demo without running real agents?',
+                'Log streaming uses Server-Sent Events from journalctl -f. SSE needs long-lived connections to real agents. Demo mode has no agents. Can&apos;t stream fake data over SSE.',
               solution:
-                'Return 204 No Content in demo mode. EventSource fires onerror immediately on non-SSE response. Log viewer detects connected=false and falls back to cursor-based HTTP polling (every 5s), which hits /logs route that returns demo data. No client-side code changes needed.',
+                'Return 204 in demo mode. EventSource errors immediately. Log viewer detects failure and falls back to HTTP polling (5s interval). Polling hits /logs route that returns demo data. No client changes needed.',
               impact:
-                'Demo mode works seamlessly. Users can browse the live demo without touching real infrastructure. SSE and polling fallback work identically from user perspective.',
+                'Demo works perfectly. Users browse live demo without infrastructure. SSE and polling look identical to users.',
             },
             {
-              title: 'Atomic Environment File Updates',
+              title: 'Atomic .env File Writes',
               problem:
-                'Updating .env files on running services is risky. A partial write or crash mid-update could corrupt config and break the app on next restart. How do you guarantee the write is atomic?',
+                'Editing .env on running services is risky. Partial write or crash mid-update corrupts config. App breaks on next restart.',
               solution:
-                'Agent writes env changes as: backup original → write to .env.tmp → mv .env.tmp .env. The mv is atomic on the same filesystem (it&apos;s a rename syscall). Never a window where .env is partially written. If process crashes mid-write, original .env is untouched.',
+                'Write sequence: backup original → write to .env.tmp → mv .env.tmp .env. The mv is atomic (rename syscall on same filesystem). No partial write window. Crash leaves original .env untouched.',
               impact:
-                'Zero partial writes. Config changes are safe. If something goes wrong, original file is always recoverable from backup.',
+                'Zero partial writes. Config changes safe. Backup always available if something breaks.',
             },
             {
-              title: 'Detecting Status Transitions in Poller',
+              title: 'Status Transition Detection',
               problem:
-                'Poller fetches status from agents, then calls UpdateStatus (writes to DB), then fetches the app to check what changed. This ordering meant you couldn&apos;t compare old vs new status. Needed for firing alerts and writing status_history.',
+                'Poller fetches status from agent, calls UpdateStatus (writes DB), then fetches app to check changes. Can&apos;t compare old vs new. Needed for alerts and uptime history.',
               solution:
-                'Fetch the app BEFORE UpdateStatus to capture oldStatus. Then compare oldStatus != newStatus after the update. Used for both notification firing (only fire on transition to stopped) and status_history writes (close old row, open new row).',
+                'Fetch app BEFORE UpdateStatus. Capture oldStatus. Compare oldStatus != newStatus after update. Fire webhook only on transition. Write status_history row (close old, open new).',
               impact:
-                'Webhook alerts fire exactly once on status change. Uptime history accurate. No duplicate notifications or missed transitions.',
+                'Alerts fire once per status change. Uptime history accurate. No duplicate notifications.',
             },
           ].map((challenge, index) => (
             <div key={index} className="rounded-lg border border-border bg-card p-6">
@@ -291,22 +291,22 @@ export default function VmMonitorPage() {
         <h2 className="mb-6 text-2xl font-bold text-foreground">What I Learned</h2>
         <div className="space-y-4 rounded-lg border border-border bg-card p-6 text-text-secondary">
           <p className="leading-relaxed">
-            <strong className="text-foreground">Go for Systems Programming:</strong> Static binaries with zero runtime dependencies are amazing for deployment. No Node, Python, or JVM needed. Just scp the binary and run it. Also learned Go&apos;s file I/O patterns (atomic rename, temp files, backups).
+            <strong className="text-foreground">Go Static Binaries:</strong> Zero runtime dependencies. Just scp and run. No Node, Python, or JVM. Learned atomic file operations (rename, temp files, backups).
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Server-Sent Events:</strong> SSE is simpler than WebSocket for one-way streaming. journalctl -f pipes perfectly to SSE. But you need a fallback strategy (HTTP polling) for cases where SSE doesn&apos;t work (demo mode, offline agents).
+            <strong className="text-foreground">SSE vs WebSocket:</strong> SSE simpler for one-way streams. journalctl -f pipes perfectly. Always need fallback (HTTP polling) for edge cases.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Next.js as API Proxy:</strong> Using Next.js API routes to proxy to the control plane keeps sensitive API keys server-side. Never in the browser JS bundle. Also makes demo mode easy to implement in one place.
+            <strong className="text-foreground">Next.js API Proxy Pattern:</strong> Keeps API keys server-side. Never in browser bundle. Makes demo mode easy to guard in one place.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">Private Networking Matters:</strong> Agents don&apos;t need public IPs. Oracle VCN provides private networking between VMs. Control plane uses private IPs (10.0.0.x) to talk to agents. Only the control plane&apos;s public API needs Nginx + TLS.
+            <strong className="text-foreground">Private Networking:</strong> Agents don&apos;t need public IPs. Oracle VCN handles private routing. Control plane uses 10.0.0.x addresses. Only control plane needs public endpoint with TLS.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">JSONB for Config Flexibility:</strong> Storing app config as JSONB meant I could add new agent features (deploy_dir, auto_restart) without DB migrations. Just new keys in the JSON blob. Agent and API model structs stay in sync by convention.
+            <strong className="text-foreground">JSONB Flexibility:</strong> App config stored as JSONB. Added new features (deploy_dir, auto_restart) without migrations. Just new JSON keys. Structs sync by convention.
           </p>
           <p className="leading-relaxed">
-            <strong className="text-foreground">What I&apos;d Do Differently:</strong> Add integration tests for the poller and agent HTTP handlers. Use a job queue (like Asynq) instead of in-memory goroutines for better observability. Add Prometheus metrics instead of just logging. Mobile app instead of just mobile web.
+            <strong className="text-foreground">What I&apos;d Do Differently:</strong> Integration tests for poller and agent handlers. Job queue like Asynq instead of goroutines. Prometheus metrics. Mobile app instead of mobile web.
           </p>
         </div>
       </section>
