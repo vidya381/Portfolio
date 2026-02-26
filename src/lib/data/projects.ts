@@ -2,6 +2,29 @@ import { Project } from '../types'
 
 export const projects: Project[] = [
   {
+    id: 'vm-monitor',
+    title: 'VM Monitor',
+    subtitle: 'Infrastructure Monitoring Platform',
+    description:
+      'Three-component system with Go agent, control plane API, and Next.js dashboard. Manages Oracle Cloud VMs and applications without SSH. Real-time log streaming, environment management, and deployment.',
+    challenge:
+      'Built agent-control plane architecture with private VCN networking. Implemented SSE log streaming with cursor-based polling fallback, atomic env file writes with backup/rename, and demo mode that blocks writes while serving fake data.',
+    techStack: [
+      'Go',
+      'Next.js',
+      'PostgreSQL',
+      'Oracle Cloud',
+      'Vercel',
+    ],
+    image: '/images/projects/vm-monitor-hero.png',
+    links: {
+      github: 'https://github.com/vidya381/vm-monitor',
+      demo: 'https://demo-vm-monitor.vercel.app',
+    },
+    featured: true,
+    order: 1,
+  },
+  {
     id: 'myspendo',
     title: 'MySpendo',
     subtitle: 'Personal Finance Tracker',
@@ -22,7 +45,7 @@ export const projects: Project[] = [
       demo: 'https://myspendo.vercel.app',
     },
     featured: true,
-    order: 1,
+    order: 2,
   },
   {
     id: 'weather-insight',
@@ -46,7 +69,7 @@ export const projects: Project[] = [
       demo: 'https://weather-insight-ml.vercel.app',
     },
     featured: true,
-    order: 2,
+    order: 3,
   },
   {
     id: 'bulls-cows',
@@ -69,7 +92,7 @@ export const projects: Project[] = [
       demo: 'https://bulls-cows-game.onrender.com',
     },
     featured: true,
-    order: 3,
+    order: 4,
   },
   {
     id: 'data-playground',
@@ -91,6 +114,6 @@ export const projects: Project[] = [
       demo: 'https://data-playground-beta.vercel.app',
     },
     featured: true,
-    order: 4,
+    order: 5,
   },
 ]
