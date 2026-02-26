@@ -2,21 +2,21 @@ export const aboutContent = {
   paragraphs: [
     "I solve problems by building systems.",
 
-    "I work on backend systems: APIs, databases, and distributed architectures. I've built production software at IBM (working with AT&T and Barclays) and Prime Healthcare. The fun part is debugging why something breaks under load and fixing it before anyone notices.",
+    "I work on backend systems — APIs, databases, distributed architectures. At IBM I built production software for AT&T and Barclays. At Prime Healthcare too. The interesting problems are the ones that only appear under load.",
 
-    "I build side projects to learn new things. Right now I'm working with Java and Python for backend, Next.js for frontend, and learning Go. I deploy everything on Oracle Cloud's free tier. Turns out running three apps on 1GB RAM teaches you more about optimization than any course.",
+    "Outside work I build side projects. Java, Go, Python for backend, Next.js for frontend, everything deployed on Oracle Cloud's free tier. Running three apps on 1GB RAM teaches you more about optimization than any course.",
 
-    "I'm looking for backend or full-stack software engineering roles (H1B sponsorship needed). When I'm not coding, I play badminton and contribute to open-source projects like Kubernetes and Oracle OpenGrok.",
+    "I contribute to open-source projects when I find something worth fixing. I play badminton. Not competitively, just badly.",
   ],
 
   techStack: {
     backend: [
       "Java (Spring Boot)",
       "Python (FastAPI)",
-      "Node.js",
       "REST APIs",
       "WebSocket",
       "Microservices",
+      "Go",
     ],
     databases: [
       "PostgreSQL",
@@ -28,9 +28,11 @@ export const aboutContent = {
     cloudDevOps: [
       "Oracle Cloud",
       "AWS",
+      "Azure",
       "Docker",
+      "Jenkins",
+      "Kubernetes",
       "CI/CD",
-      "Linux",
       "Git",
     ],
     frontend: [
