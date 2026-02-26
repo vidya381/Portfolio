@@ -83,19 +83,13 @@ export default function VmMonitorPage() {
       <section className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-foreground">Architecture</h2>
         <div className="rounded-lg border border-border bg-card p-6">
-          <div className="space-y-4 text-text-secondary">
-            <p className="leading-relaxed font-mono text-sm">
-              Browser<br />
-              &nbsp;&nbsp;↓<br />
-              Dashboard (Next.js → Vercel)<br />
-              &nbsp;&nbsp;↓<br />
-              Control Plane API (Oracle VM 2) + PostgreSQL<br />
-              &nbsp;&nbsp;↓<br />
-              Agent (VM 1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agent (VM 2, self-monitoring)<br />
-              &nbsp;&nbsp;- MySpendo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- VM Monitor API<br />
-              &nbsp;&nbsp;- Weather Insight
-            </p>
-          </div>
+          <Image
+            src="/images/architecture/VM Monitor Architecture.png"
+            alt="VM Monitor Architecture Diagram"
+            width={1200}
+            height={800}
+            className="w-full h-auto"
+          />
         </div>
         <div className="mt-6 space-y-4 text-text-secondary">
           <p className="leading-relaxed">
@@ -206,7 +200,7 @@ export default function VmMonitorPage() {
             {
               title: 'SSE Streaming with Demo Mode',
               problem:
-                'Log streaming uses Server-Sent Events from journalctl -f. SSE needs long-lived connections to real agents. Demo mode has no agents. Can&apos;t stream fake data over SSE.',
+                'Log streaming uses Server-Sent Events from journalctl -f. SSE needs long-lived connections to real agents. Demo mode has no agents. Cannot stream fake data over SSE.',
               solution:
                 'Return 204 in demo mode. EventSource errors immediately. Log viewer detects failure and falls back to HTTP polling (5s interval). Polling hits /logs route that returns demo data. No client changes needed.',
               impact:
@@ -224,7 +218,7 @@ export default function VmMonitorPage() {
             {
               title: 'Status Transition Detection',
               problem:
-                'Poller fetches status from agent, calls UpdateStatus (writes DB), then fetches app to check changes. Can&apos;t compare old vs new. Needed for alerts and uptime history.',
+                'Poller fetches status from agent, calls UpdateStatus (writes DB), then fetches app to check changes. Cannot compare old vs new. Needed for alerts and uptime history.',
               solution:
                 'Fetch app BEFORE UpdateStatus. Capture oldStatus. Compare oldStatus != newStatus after update. Fire webhook only on transition. Write status_history row (close old, open new).',
               impact:

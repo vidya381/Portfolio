@@ -176,7 +176,7 @@ export default function MySpendoPage() {
               problem:
                 'Hourly background job processes recurring transactions. If two instances run at the same time, users get duplicate transactions.',
               solution:
-                'Used PostgreSQL advisory locks. Job tries to get the lock before running. If it can&apos;t get it, another instance is already running, so it exits. Releases lock when done.',
+                'Used PostgreSQL advisory locks. Job tries to get lock before running. If it cannot get lock, another instance is already running, so it exits. Releases lock when done.',
               impact:
                 'No duplicate transactions. Job runs reliably every hour even during server restarts.',
             },
