@@ -5,7 +5,7 @@ import { SITE_CONFIG } from '@/lib/constants'
 
 export default function SocialLinks() {
   return (
-    <ul className="ml-1 flex items-center gap-5" aria-label="Social media">
+    <ul className="ml-1 mt-6 flex items-center gap-5 lg:mt-0" aria-label="Social media">
       <li className="shrink-0">
         <a
           href={SITE_CONFIG.github}
